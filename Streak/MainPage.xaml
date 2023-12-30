@@ -6,7 +6,7 @@
     <ScrollView>
         <FlexLayout Direction="Row" Wrap="Wrap" AlignContent="Start">
             <StackLayout FlexLayout.Basis="33%"   Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
-                <Button CornerRadius="100" Text="0" HeightRequest="120" WidthRequest="120" FontAttributes="Bold" FontSize="Large"/>
+                <Button />
                 <Label Text="Push ups" 
                         HeightRequest="30" 
                         FontSize="18"
@@ -14,7 +14,7 @@
                         VerticalOptions="Center"/>
             </StackLayout>
             <StackLayout FlexLayout.Basis="33%"   Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
-                <Button CornerRadius="100" Text="0" HeightRequest="120" WidthRequest="120" FontAttributes="Bold" FontSize="Large"/>
+                <Button/>
                 <Label Text="Squats" 
                     HeightRequest="30" 
                     FontSize="18"
@@ -22,7 +22,7 @@
                     VerticalOptions="Center"/>
             </StackLayout>
             <StackLayout FlexLayout.Basis="33%"   Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
-                <Button CornerRadius="100" Text="0" HeightRequest="120" WidthRequest="120" FontAttributes="Bold" FontSize="Large"/>
+                <Button/>
                 <Label Text="Wake" 
                     HeightRequest="30" 
                     FontSize="18"
@@ -30,7 +30,7 @@
                     VerticalOptions="Center"/>
             </StackLayout>
             <StackLayout FlexLayout.Basis="33%"   Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
-                <Button CornerRadius="100" Text="0" HeightRequest="120" WidthRequest="120" FontAttributes="Bold" FontSize="Large"/>
+                <Button />
                 <Label Text="Read" 
                     HeightRequest="30" 
                     FontSize="18"
@@ -38,7 +38,7 @@
                     VerticalOptions="Center"/>
             </StackLayout>
             <StackLayout FlexLayout.Basis="33%"   Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
-                <Button CornerRadius="100" Text="0" HeightRequest="120" WidthRequest="120" FontAttributes="Bold" FontSize="Large"/>
+                <Button />
                 <Label Text="Code" 
                     HeightRequest="30" 
                     FontSize="18"
