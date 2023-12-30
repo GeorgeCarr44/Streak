@@ -5,65 +5,45 @@
 
     <ScrollView>
         <FlexLayout Direction="Row" Wrap="Wrap" AlignContent="Start">
-
-            <!--<FlexLayout FlexLayout.Basis="33%"  BackgroundColor="Aquamarine" Direction="Column" AlignContent="Start"
-            JustifyContent="SpaceEvenly">
-                <Button CornerRadius="100" Text="0" FontAttributes="Bold" FontAutoScalingEnabled="True" />
-                <Label Text="Push ups" 
-                       BackgroundColor="Yellow"
-                       FontSize="18"
-                       HorizontalOptions="Center"
-                       VerticalOptions="Center"/>
-            </FlexLayout>-->
-
-
-
-            <!--<FlexLayout FlexLayout.Basis="33%"  HeightRequest="180" WidthRequest="120" BackgroundColor="BlueViolet" >
-                <Button CornerRadius="100" Text="0" FontAttributes="Bold" FontAutoScalingEnabled="True"/>
-                <Label Text="Push ups" 
-                        BackgroundColor="Yellow"
-                        HeightRequest="30" 
-                        FontSize="18"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"/>
-            </FlexLayout>-->
-
-            <StackLayout FlexLayout.Basis="33%"  Padding="10" Spacing="10" HeightRequest="180" WidthRequest="120" >
-                <Button  CornerRadius="100" Text="0" HeightRequest="120" WidthRequest="120" FontAttributes="Bold" FontSize="Large"/>
-                <Label Text="Push ups" 
-                        BackgroundColor="Yellow"
-                        HeightRequest="30" 
-                        FontSize="18"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"/>
-            </StackLayout>
-
-            <StackLayout FlexLayout.Basis="33%"  Padding="10" Spacing="10" HeightRequest="180" WidthRequest="120" >
-                <Button  CornerRadius="100" Text="0" HeightRequest="120" WidthRequest="120" FontAttributes="Bold" FontSize="Large"/>
-                <Label Text="Push ups" 
-                        BackgroundColor="Yellow"
-                        HeightRequest="30" 
-                        FontSize="18"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"/>
-            </StackLayout>
-            <StackLayout FlexLayout.Basis="33%"  Padding="10" Spacing="10" HeightRequest="180" WidthRequest="120" BackgroundColor="BlueViolet" >
+            <StackLayout FlexLayout.Basis="33%"   Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
                 <Button CornerRadius="100" Text="0" HeightRequest="120" WidthRequest="120" FontAttributes="Bold" FontSize="Large"/>
                 <Label Text="Push ups" 
-                        BackgroundColor="Yellow"
                         HeightRequest="30" 
                         FontSize="18"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"/>
             </StackLayout>
-            <StackLayout FlexLayout.Basis="33%"   Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140" BackgroundColor="Yellow" >
+            <StackLayout FlexLayout.Basis="33%"   Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
                 <Button CornerRadius="100" Text="0" HeightRequest="120" WidthRequest="120" FontAttributes="Bold" FontSize="Large"/>
-                <Label Text="Push ups" 
-                        BackgroundColor="Yellow"
-                        HeightRequest="30" 
-                        FontSize="18"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"/>
+                <Label Text="Squats" 
+                    HeightRequest="30" 
+                    FontSize="18"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+            </StackLayout>
+            <StackLayout FlexLayout.Basis="33%"   Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
+                <Button CornerRadius="100" Text="0" HeightRequest="120" WidthRequest="120" FontAttributes="Bold" FontSize="Large"/>
+                <Label Text="Wake" 
+                    HeightRequest="30" 
+                    FontSize="18"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+            </StackLayout>
+            <StackLayout FlexLayout.Basis="33%"   Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
+                <Button CornerRadius="100" Text="0" HeightRequest="120" WidthRequest="120" FontAttributes="Bold" FontSize="Large"/>
+                <Label Text="Read" 
+                    HeightRequest="30" 
+                    FontSize="18"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+            </StackLayout>
+            <StackLayout FlexLayout.Basis="33%"   Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
+                <Button CornerRadius="100" Text="0" HeightRequest="120" WidthRequest="120" FontAttributes="Bold" FontSize="Large"/>
+                <Label Text="Code" 
+                    HeightRequest="30" 
+                    FontSize="18"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
             </StackLayout>
         </FlexLayout>
     </ScrollView>
