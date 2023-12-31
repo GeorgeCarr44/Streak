@@ -1,50 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Streak.MainPage">
-
+             x:Class="Streak.GoalsPage"
+             xmlns:viewmodel="clr-namespace:Streak.ViewModels"
+             x:DataType="viewmodel:GoalsViewModel">
     <ScrollView>
         <FlexLayout Direction="Row" Wrap="Wrap" AlignContent="Start">
+
+            <!--The collection of goals-->
+            <CollectionView x:Name="collectionView" ItemsSource="{Binding Goals}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout FlexLayout.Basis="33%"   Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
+                    <Button />
+                        <Label Text="{Binding Goals}" 
+                            HeightRequest="30" 
+                            FontSize="18"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"/>
+                </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                
+
+            </CollectionView>
+
+            <!--Add new goal Button-->
             <StackLayout FlexLayout.Basis="33%"   Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
                 <Button />
-                <Label Text="Push ups" 
+                <Label Text="+" 
                         HeightRequest="30" 
                         FontSize="18"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"/>
             </StackLayout>
-            <StackLayout FlexLayout.Basis="33%"   Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
-                <Button/>
-                <Label Text="Squats" 
-                    HeightRequest="30" 
-                    FontSize="18"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"/>
-            </StackLayout>
-            <StackLayout FlexLayout.Basis="33%"   Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
-                <Button/>
-                <Label Text="Wake" 
-                    HeightRequest="30" 
-                    FontSize="18"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"/>
-            </StackLayout>
-            <StackLayout FlexLayout.Basis="33%"   Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
-                <Button />
-                <Label Text="Read" 
-                    HeightRequest="30" 
-                    FontSize="18"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"/>
-            </StackLayout>
-            <StackLayout FlexLayout.Basis="33%"   Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
-                <Button />
-                <Label Text="Code" 
-                    HeightRequest="30" 
-                    FontSize="18"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"/>
-            </StackLayout>
+
         </FlexLayout>
     </ScrollView>
 

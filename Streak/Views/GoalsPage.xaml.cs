@@ -1,12 +1,15 @@
-﻿namespace Streak
+﻿using Streak.ViewModels;
+
+namespace Streak
 {
-    public partial class MainPage : ContentPage
+    public partial class GoalsPage : ContentPage
     {
 
 
-        public MainPage()
+        public GoalsPage(GoalsViewModel vm)
         {
             InitializeComponent();
+            BindingContext = vm;
         }
 
 
