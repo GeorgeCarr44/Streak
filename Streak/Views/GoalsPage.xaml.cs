@@ -29,6 +29,9 @@ namespace Streak
                 Goals.Clear();
                 foreach (var item in items)
                     Goals.Add(item);
+
+                //This is the new goal button
+                Goals.Add(new Goal() { ID = 0, Name = "New Goal" });
             });
         }
 
@@ -38,6 +41,21 @@ namespace Streak
             {
                 ["Goal"] = new Goal()
             });
+        }
+
+        async void OnItemClicked(object sender, EventArgs e)
+        {
+            //// this if could be better
+            //if (e.CurrentSelection.FirstOrDefault() is not Goal item)
+            //    return;
+
+            //if (item.ID == 0)
+            //    return;
+
+            //await Shell.Current.GoToAsync(nameof(EditGoalPage), true, new Dictionary<string, object>
+            //{
+            //    ["Item"] = item
+            //});
         }
     }
 

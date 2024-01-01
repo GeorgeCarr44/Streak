@@ -1,54 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Streak"
              xmlns:models="clr-namespace:Streak.Models"
              x:Class="Streak.GoalsPage">
-        
-    <FlexLayout BindableLayout.ItemsSource="{Binding Goals}" Direction="Row" Wrap="Wrap" AlignContent="Start">
-        <StackLayout FlexLayout.Basis="33%" Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
-            <Button Clicked="OnItemAdded"/>
-            <Label Text="Click here To add new" 
+
+    <ContentPage.Resources>
+        <DataTemplate x:Key="defaultDataTemplate">
+            <StackLayout  FlexLayout.Basis="33%" Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
+                <Button Clicked="OnItemClicked" />
+                <Label Text="{Binding Name}" 
                     HeightRequest="30" 
                     FontSize="18"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"/>
-        </StackLayout>
-        <BindableLayout.ItemTemplate>
-            <DataTemplate>
-                <StackLayout  FlexLayout.Basis="33%" Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
-                    <Button />
-                    <Label Text="{Binding Name}" 
-                        HeightRequest="30" 
-                        FontSize="18"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"/>
-                </StackLayout>
-            </DataTemplate>
-        </BindableLayout.ItemTemplate>
-    </FlexLayout>
+            </StackLayout>
+        </DataTemplate>
+        <DataTemplate x:Key="createButtonDataTemplate">
+            <StackLayout FlexLayout.Basis="33%" Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
+                <Button Clicked="OnItemAdded"/>
+                <Label Text="Click here To add new" 
+                    HeightRequest="30" 
+                    FontSize="18"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+            </StackLayout>
+        </DataTemplate>
+        <local:GoalTemplateSelector x:Key="goalTemplateSelector"
+                                  DefaultTemplate="{StaticResource defaultDataTemplate}"
+                                  CreateButtonTemplate="{StaticResource createButtonDataTemplate}" />
+
+    </ContentPage.Resources>
 
 
-
-    <!--<Grid RowDefinitions="*,Auto">
-        <CollectionView 
-                  VerticalOptions="Fill"
-                  ItemsSource="{Binding Items}"
-                  SelectionMode="Single">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:Goal">
-                    <Grid ColumnDefinitions="*, Auto" Padding="20">
-                        <Label Text="Tests"/>
-                        <Label Text="{Binding Name}"
-                                   VerticalTextAlignment="Center"/>
-                        <Label Text="✔️"
-                                   Grid.Column="1"
-                                   VerticalTextAlignment="Center"
-                                   />
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-        <Button Grid.Row="1" Text="Add New Item" Clicked="OnItemAdded"
-                Margin="20"/>
-    </Grid>-->
+    <FlexLayout BindableLayout.ItemsSource="{Binding Goals}" 
+                BindableLayout.ItemTemplateSelector="{StaticResource goalTemplateSelector}"
+                Direction="Row" 
+                Wrap="Wrap" 
+                AlignContent="Start"/>
 </ContentPage>
