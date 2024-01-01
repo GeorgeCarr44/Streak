@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Streak.Data;
 
 namespace Streak
 {
@@ -13,6 +14,13 @@ namespace Streak
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
+
+            //Pages
+            builder.Services.AddSingleton<GoalsPage>();
+            
+            //Database
+            builder.Services.AddSingleton<GoalsDatabase>();
+
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif

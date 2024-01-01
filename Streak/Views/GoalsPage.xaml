@@ -1,31 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<!--<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Streak.Models"
              x:Class="Streak.GoalsPage"
-             xmlns:viewmodel="clr-namespace:Streak.ViewModels"
-             x:DataType="viewmodel:GoalsViewModel">
+             >
     <ScrollView>
         <FlexLayout Direction="Row" Wrap="Wrap" AlignContent="Start">
 
-            <!--The collection of goals-->
+            --><!--The collection of goals--><!--
             <CollectionView x:Name="collectionView" ItemsSource="{Binding Goals}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout FlexLayout.Basis="33%"   Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
-                    <Button />
-                        <Label Text="{Binding Goals}" 
+                        <Button />
+                            <Label Text="{Binding Name}" 
                             HeightRequest="30" 
                             FontSize="18"
                             HorizontalOptions="Center"
                             VerticalOptions="Center"/>
-                </StackLayout>
+                        </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
                 
 
             </CollectionView>
 
-            <!--Add new goal Button-->
+            --><!--Add new goal Button--><!--
             <StackLayout FlexLayout.Basis="33%"   Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
                 <Button />
                 <Label Text="+" 
@@ -38,4 +38,34 @@
         </FlexLayout>
     </ScrollView>
 
-</ContentPage>
+</ContentPage>-->
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Streak.Models"
+             x:Class="Streak.GoalsPage"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="True"
+             Title="Todo">
+    <FlexLayout Direction="Row" Wrap="Wrap" AlignContent="Start">
+        <CollectionView 
+                  ItemsSource="{Binding Goals}"
+                  >
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Goal">
+
+                    <StackLayout FlexLayout.Basis="33%"   Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
+                        <Button />
+                        <Label Text="{Binding Name}" 
+                            HeightRequest="30" 
+                            FontSize="18"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"/>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button Grid.Row="1" Text="Add New Item"
+                Margin="20"/>
+    </FlexLayout>
+</ContentPage>    

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -11,13 +12,13 @@ namespace Streak.Models
 {
     public class Goal
     {
-        public required int Id { get; set; }
-        public required string Name { get; set; }
-        public required DateTime CreationDate { get; set; }
+        [PrimaryKey, AutoIncrement]
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public DateTime CreationDate { get; set; }
         public string? Description { get; set; }
         public int CurrentStreak { get; set; }
         public int LongestStreak { get; set; }
 
-        public Goal() { }
     }
 }
