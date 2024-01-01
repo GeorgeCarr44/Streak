@@ -40,32 +40,31 @@
 
 </ContentPage>-->
 
+    <!--Example-->
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:Streak.Models"
-             x:Class="Streak.GoalsPage"
-             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
-             ios:Page.UseSafeArea="True"
-             Title="Todo">
-    <FlexLayout Direction="Row" Wrap="Wrap" AlignContent="Start">
+             x:Class="Streak.GoalsPage">
+    <Grid RowDefinitions="*,Auto">
         <CollectionView 
-                  ItemsSource="{Binding Goals}"
-                  >
+                  VerticalOptions="Fill"
+                  ItemsSource="{Binding Items}"
+                  SelectionMode="Single">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Goal">
-
-                    <StackLayout FlexLayout.Basis="33%"   Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
-                        <Button />
-                        <Label Text="{Binding Name}" 
-                            HeightRequest="30" 
-                            FontSize="18"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center"/>
-                    </StackLayout>
+                    <Grid ColumnDefinitions="*, Auto" Padding="20">
+                        <Label Text="Tests"/>
+                        <Label Text="{Binding Name}"
+                                   VerticalTextAlignment="Center"/>
+                        <Label Text="✔️"
+                                   Grid.Column="1"
+                                   VerticalTextAlignment="Center"
+                                   />
+                    </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Button Grid.Row="1" Text="Add New Item"
+        <Button Grid.Row="1" Text="Add New Item" Clicked="OnItemAdded"
                 Margin="20"/>
-    </FlexLayout>
-</ContentPage>    
+    </Grid>
+</ContentPage>

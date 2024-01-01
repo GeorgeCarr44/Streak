@@ -67,9 +67,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\EditGoalPage.xaml.cs">
+	    <DependentUpon>EditGoalPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\GoalsPage.xaml.cs">
 	    <DependentUpon>GoalsPage.xaml</DependentUpon>
 	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\EditGoalPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Streak.Data;
+using Streak.Views;
 
 namespace Streak
 {
@@ -17,7 +18,9 @@ namespace Streak
 
             //Pages
             builder.Services.AddSingleton<GoalsPage>();
-            
+            builder.Services.AddTransient<EditGoalPage>();
+
+
             //Database
             builder.Services.AddSingleton<GoalsDatabase>();
 
