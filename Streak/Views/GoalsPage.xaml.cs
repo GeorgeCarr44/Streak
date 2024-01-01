@@ -9,14 +9,11 @@ namespace Streak
     {
 
         GoalsDatabase database;
-        public ObservableCollection<Goal> Goals { get; set; } = new()
-        {
-            new Goal(){ID = 1, Name = "Test"},
-            new Goal(){ID = 2, Name = "Test2"},
-            new Goal(){ID = 3, Name = "Test3"} 
-        };
+        public ObservableCollection<Goal> Goals { get; set; } = new();
+        
 
         public GoalsPage(GoalsDatabase goalsDatabase)
+
         {
             InitializeComponent();
             database = goalsDatabase;
@@ -32,7 +29,6 @@ namespace Streak
                 Goals.Clear();
                 foreach (var item in items)
                     Goals.Add(item);
-
             });
         }
 

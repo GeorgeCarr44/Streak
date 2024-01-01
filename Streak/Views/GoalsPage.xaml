@@ -1,51 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!--<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:models="clr-namespace:Streak.Models"
-             x:Class="Streak.GoalsPage"
-             >
-    <ScrollView>
-        <FlexLayout Direction="Row" Wrap="Wrap" AlignContent="Start">
-
-            --><!--The collection of goals--><!--
-            <CollectionView x:Name="collectionView" ItemsSource="{Binding Goals}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout FlexLayout.Basis="33%"   Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
-                        <Button />
-                            <Label Text="{Binding Name}" 
-                            HeightRequest="30" 
-                            FontSize="18"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center"/>
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-                
-
-            </CollectionView>
-
-            --><!--Add new goal Button--><!--
-            <StackLayout FlexLayout.Basis="33%"   Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
-                <Button />
-                <Label Text="+" 
-                        HeightRequest="30" 
-                        FontSize="18"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"/>
-            </StackLayout>
-
-        </FlexLayout>
-    </ScrollView>
-
-</ContentPage>-->
-
-    <!--Example-->
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:Streak.Models"
              x:Class="Streak.GoalsPage">
-    <Grid RowDefinitions="*,Auto">
+        
+    <FlexLayout BindableLayout.ItemsSource="{Binding Goals}" Direction="Row" Wrap="Wrap" AlignContent="Start">
+        <StackLayout FlexLayout.Basis="33%" Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
+            <Button Clicked="OnItemAdded"/>
+            <Label Text="Click here To add new" 
+                    HeightRequest="30" 
+                    FontSize="18"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+        </StackLayout>
+        <BindableLayout.ItemTemplate>
+            <DataTemplate>
+                <StackLayout  FlexLayout.Basis="33%" Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
+                    <Button />
+                    <Label Text="{Binding Name}" 
+                        HeightRequest="30" 
+                        FontSize="18"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"/>
+                </StackLayout>
+            </DataTemplate>
+        </BindableLayout.ItemTemplate>
+    </FlexLayout>
+
+
+
+    <!--<Grid RowDefinitions="*,Auto">
         <CollectionView 
                   VerticalOptions="Fill"
                   ItemsSource="{Binding Items}"
@@ -66,5 +50,5 @@
         </CollectionView>
         <Button Grid.Row="1" Text="Add New Item" Clicked="OnItemAdded"
                 Margin="20"/>
-    </Grid>
+    </Grid>-->
 </ContentPage>
