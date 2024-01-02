@@ -8,7 +8,8 @@
     <ContentPage.Resources>
         <DataTemplate x:Key="defaultDataTemplate">
             <StackLayout FlexLayout.Basis="33%" Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
-                <Button BorderColor="Blue"  BorderWidth="3" Clicked="OnItemClicked" />
+                <Button BorderColor="Blue"  BorderWidth="3" Pressed="OnItemPressed" Released="OnItemReleased" />
+                <!--<Button BorderColor="Blue"  BorderWidth="3" Clicked="OnItemClicked" />-->
                 <Label Text="{Binding Name}" 
                     HeightRequest="30" 
                     FontSize="18"
@@ -26,11 +27,12 @@
                                   CreateButtonTemplate="{StaticResource createButtonDataTemplate}" />
 
     </ContentPage.Resources>
-
-
-    <FlexLayout BindableLayout.ItemsSource="{Binding Goals}" 
-                BindableLayout.ItemTemplateSelector="{StaticResource goalTemplateSelector}"
-                Direction="Row" 
-                Wrap="Wrap" 
-                AlignContent="Start"/>
+    <StackLayout Padding="10, 0">
+        <Label Text="{Binding LblText}"/>
+        <FlexLayout BindableLayout.ItemsSource="{Binding Goals}" 
+                    BindableLayout.ItemTemplateSelector="{StaticResource goalTemplateSelector}"
+                    Direction="Row" 
+                    Wrap="Wrap" 
+                    AlignContent="Start"/>
+    </StackLayout>
 </ContentPage>
