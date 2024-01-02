@@ -3,7 +3,9 @@ using Streak.Data;
 using Streak.Models;
 using Streak.Views;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Timers;
+using System.Xml;
 
 namespace Streak
 {
@@ -44,7 +46,10 @@ namespace Streak
             {
                 Goals.Clear();
                 foreach (var item in items)
+                {
+                    //Just for test data uncheck each
                     Goals.Add(item);
+                }
 
                 //This is the new goal button
                 Goals.Add(new Goal() { ID = 0, Name = "New Goal" });
@@ -74,32 +79,64 @@ namespace Streak
         }
 
 
-        System.Timers.Timer aTimer;
+        System.Timers.Timer _timer;
+        Stopwatch stopWatch;
+        Goal _currentSelectedGoal;
         async void OnItemPressed(object sender, EventArgs e)
         {
-            LblText = "true";
+            LblText = "OnItemPressed";
+            // Get the goal
+            var border = (Button)sender;
+            _currentSelectedGoal = (Goal)border.BindingContext;
 
-            //Hold time
-            aTimer = new System.Timers.Timer();
-            aTimer.Elapsed += new ElapsedEventHandler(OnHeldEvent);
-            aTimer.Interval = 2000;
-            aTimer.Enabled = true;
+            // if there is not goal dont start the timer return an await release.
+            // Need to test how slide/drag click works here?
+            if(_currentSelectedGoal.ID == 0) return;
+            //Timer to trigger Held Event
+            _timer = new System.Timers.Timer();
+            _timer.Elapsed += new ElapsedEventHandler(OnHeldEvent);
+            _timer.Interval = 800;
+            //Stopwatch to see if Held Event would have triggered then ignore the Release
+            stopWatch = new Stopwatch();
+            _timer.Enabled = true;
+            stopWatch.Start();
 
-            (sender as Button).Text = "You pressed me!";
+            //(sender as Button).Text = "You pressed me!";
         }
 
         // Specify what you want to happen when the Elapsed event is raised.
         async void OnHeldEvent(object source, ElapsedEventArgs e)
         {
-            aTimer.Dispose();
+            LblText = "OnHeldEvent";
+            //Dispose of our current running timer
+            _timer.Stop();
+            //toggle the check
+            _currentSelectedGoal.Checked = !_currentSelectedGoal.Checked;
+            await database.SaveItemAsync(_currentSelectedGoal);
             LblText = "held";
         }
 
         async void OnItemReleased(object sender, EventArgs e)
         {
-            aTimer.Dispose();
-            LblText = "false";
-            (sender as Button).Text = "You released me!";
+            LblText = "OnItemReleased";
+            stopWatch.Stop();
+            _timer.Stop();
+            //if its under the hold time otherwise this is handled by holding
+            if(stopWatch.Elapsed.TotalMilliseconds < 800)
+            {
+                //Dispose of our current running timer
+                var border = (Button)sender;
+                var Goal = (Goal)border.BindingContext;
+
+                if (Goal.ID == 0)
+                    return;
+
+                await Shell.Current.GoToAsync(nameof(EditGoalPage), true, new Dictionary<string, object>
+                {
+                    ["Goal"] = Goal
+                });
+            }
+
         }
     }
 }
