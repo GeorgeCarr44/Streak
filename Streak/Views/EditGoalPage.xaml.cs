@@ -19,6 +19,11 @@ public partial class EditGoalPage : ContentPage
         database = goalDatabase;
     }
 
+    protected override async void OnAppearing()
+    {
+        deleteButton.IsVisible = Goal.ID != 0;
+    }
+
     async void OnSaveClicked(object sender, EventArgs e)
     {
         if (string.IsNullOrWhiteSpace(Goal.Name))
