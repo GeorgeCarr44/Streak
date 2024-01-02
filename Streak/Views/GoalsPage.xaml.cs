@@ -74,30 +74,30 @@ namespace Streak
         }
 
 
+        System.Timers.Timer aTimer;
         async void OnItemPressed(object sender, EventArgs e)
         {
             LblText = "true";
 
-            ////Hold time
-            //System.Timers.Timer aTimer = new System.Timers.Timer();
-            //aTimer.Elapsed += new ElapsedEventHandler(OnHeldEvent);
-            //aTimer.Interval = 5000;
-            //aTimer.Enabled = true;
+            //Hold time
+            aTimer = new System.Timers.Timer();
+            aTimer.Elapsed += new ElapsedEventHandler(OnHeldEvent);
+            aTimer.Interval = 2000;
+            aTimer.Enabled = true;
 
-            //Console.WriteLine("Press \'q\' to quit the sample.");
-            //while (Console.Read() != 'q') ;
-            
             (sender as Button).Text = "You pressed me!";
         }
 
         // Specify what you want to happen when the Elapsed event is raised.
-        private static void OnHeldEvent(object source, ElapsedEventArgs e)
+        async void OnHeldEvent(object source, ElapsedEventArgs e)
         {
-            Console.WriteLine("Hello World!");
+            aTimer.Dispose();
+            LblText = "held";
         }
 
         async void OnItemReleased(object sender, EventArgs e)
         {
+            aTimer.Dispose();
             LblText = "false";
             (sender as Button).Text = "You released me!";
         }
