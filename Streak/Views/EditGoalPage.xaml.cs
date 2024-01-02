@@ -22,6 +22,7 @@ public partial class EditGoalPage : ContentPage
     protected override async void OnAppearing()
     {
         deleteButton.IsVisible = Goal.ID != 0;
+        base.OnAppearing();
     }
 
     async void OnSaveClicked(object sender, EventArgs e)

@@ -1,7 +1,9 @@
-﻿using Streak.Data;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Streak.Data;
 using Streak.Models;
 using Streak.Views;
 using System.Collections.ObjectModel;
+using System.Timers;
 
 namespace Streak
 {
@@ -10,10 +12,24 @@ namespace Streak
 
         GoalsDatabase database;
         public ObservableCollection<Goal> Goals { get; set; } = new();
-        
+        public string isCurrentlyPressed;
+
+
+        private string _lblText;
+        public string LblText
+        {
+            get
+            {
+                return _lblText;
+            }
+            set
+            {
+                _lblText = value;
+                OnPropertyChanged();
+            }
+        }
 
         public GoalsPage(GoalsDatabase goalsDatabase)
-
         {
             InitializeComponent();
             database = goalsDatabase;
@@ -55,6 +71,35 @@ namespace Streak
             {
                 ["Goal"] = Goal
             });
+        }
+
+
+        async void OnItemPressed(object sender, EventArgs e)
+        {
+            LblText = "true";
+
+            ////Hold time
+            //System.Timers.Timer aTimer = new System.Timers.Timer();
+            //aTimer.Elapsed += new ElapsedEventHandler(OnHeldEvent);
+            //aTimer.Interval = 5000;
+            //aTimer.Enabled = true;
+
+            //Console.WriteLine("Press \'q\' to quit the sample.");
+            //while (Console.Read() != 'q') ;
+            
+            (sender as Button).Text = "You pressed me!";
+        }
+
+        // Specify what you want to happen when the Elapsed event is raised.
+        private static void OnHeldEvent(object source, ElapsedEventArgs e)
+        {
+            Console.WriteLine("Hello World!");
+        }
+
+        async void OnItemReleased(object sender, EventArgs e)
+        {
+            LblText = "false";
+            (sender as Button).Text = "You released me!";
         }
     }
 }
