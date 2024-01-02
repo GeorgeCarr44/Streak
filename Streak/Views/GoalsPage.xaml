@@ -6,10 +6,19 @@
              x:Class="Streak.GoalsPage">
 
     <ContentPage.Resources>
-        <DataTemplate x:Key="defaultDataTemplate">
+        <DataTemplate x:Key="checkedDataTemplate">
             <StackLayout FlexLayout.Basis="33%" Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
-                <Button BorderColor="Blue"  BorderWidth="3" Pressed="OnItemPressed" Released="OnItemReleased" />
-                <!--<Button BorderColor="Blue"  BorderWidth="3" Clicked="OnItemClicked" />-->
+                <Button Text="{Binding Checked}" BorderColor="Blue" BorderWidth="3" Pressed="OnItemPressed" Released="OnItemReleased" />
+                <Label Text="{Binding Name}" 
+                    HeightRequest="30" 
+                    FontSize="18"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+            </StackLayout>
+        </DataTemplate>
+        <DataTemplate x:Key="uncheckedDataTemplate">
+            <StackLayout FlexLayout.Basis="33%" Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
+                <Button Text="{Binding Checked}" BorderColor="Blue" BorderWidth="3" BackgroundColor="Transparent" Pressed="OnItemPressed" Released="OnItemReleased" />
                 <Label Text="{Binding Name}" 
                     HeightRequest="30" 
                     FontSize="18"
@@ -23,7 +32,8 @@
             </StackLayout>
         </DataTemplate>
         <local:GoalTemplateSelector x:Key="goalTemplateSelector"
-                                  DefaultTemplate="{StaticResource defaultDataTemplate}"
+                                  CheckedTemplate="{StaticResource checkedDataTemplate}"
+                                  UncheckedTemplate="{StaticResource uncheckedDataTemplate}"
                                   CreateButtonTemplate="{StaticResource createButtonDataTemplate}" />
 
     </ContentPage.Resources>
