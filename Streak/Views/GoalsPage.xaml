@@ -7,8 +7,8 @@
 
     <ContentPage.Resources>
         <DataTemplate x:Key="defaultDataTemplate">
-            <StackLayout  FlexLayout.Basis="33%" Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
-                <Button Clicked="OnItemClicked" />
+            <StackLayout FlexLayout.Basis="33%" Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
+                <Button BorderColor="Blue"  BorderWidth="3" Clicked="OnItemClicked" />
                 <Label Text="{Binding Name}" 
                     HeightRequest="30" 
                     FontSize="18"
@@ -18,12 +18,7 @@
         </DataTemplate>
         <DataTemplate x:Key="createButtonDataTemplate">
             <StackLayout FlexLayout.Basis="33%" Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
-                <Button Clicked="OnItemAdded"/>
-                <Label Text="Click here To add new" 
-                    HeightRequest="30" 
-                    FontSize="18"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"/>
+                <Button Text="+" FontSize="Large" BorderColor="Blue" BorderWidth="3" Clicked="OnItemAdded"/>
             </StackLayout>
         </DataTemplate>
         <local:GoalTemplateSelector x:Key="goalTemplateSelector"

@@ -45,18 +45,16 @@ namespace Streak
 
         async void OnItemClicked(object sender, EventArgs e)
         {
-            //// this if could be better
-            //if (e.CurrentSelection.FirstOrDefault() is not Goal item)
-            //    return;
+            var border = (Button)sender;
+            var Goal = (Goal)border.BindingContext;
 
-            //if (item.ID == 0)
-            //    return;
+            if (Goal.ID == 0)
+                return;
 
-            //await Shell.Current.GoToAsync(nameof(EditGoalPage), true, new Dictionary<string, object>
-            //{
-            //    ["Item"] = item
-            //});
+            await Shell.Current.GoToAsync(nameof(EditGoalPage), true, new Dictionary<string, object>
+            {
+                ["Goal"] = Goal
+            });
         }
     }
-
 }
