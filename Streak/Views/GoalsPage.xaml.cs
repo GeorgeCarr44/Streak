@@ -14,6 +14,11 @@ namespace Streak
 
         GoalsDatabase database;
         public ObservableCollection<Goal> Goals { get; set; } = new();
+        
+        //Private fields to handle special interation.
+        private System.Timers.Timer _timer;
+        private Stopwatch stopWatch;
+        private Goal _currentSelectedGoal;
         public GoalsPage(GoalsDatabase goalsDatabase)
         {
             InitializeComponent();
@@ -52,24 +57,6 @@ namespace Streak
             });
         }
 
-        async void OnItemClicked(object sender, EventArgs e)
-        {
-            var border = (Button)sender;
-            var Goal = (Goal)border.BindingContext;
-
-            if (Goal.ID == 0)
-                return;
-
-            await Shell.Current.GoToAsync(nameof(EditGoalPage), true, new Dictionary<string, object>
-            {
-                ["Goal"] = Goal
-            });
-        }
-
-
-        System.Timers.Timer _timer;
-        Stopwatch stopWatch;
-        Goal _currentSelectedGoal;
         async void OnItemPressed(object sender, EventArgs e)
         {
             // Get the goal
