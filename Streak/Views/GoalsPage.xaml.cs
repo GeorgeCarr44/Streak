@@ -14,23 +14,6 @@ namespace Streak
 
         GoalsDatabase database;
         public ObservableCollection<Goal> Goals { get; set; } = new();
-        public string isCurrentlyPressed;
-
-
-        private string _lblText;
-        public string LblText
-        {
-            get
-            {
-                return _lblText;
-            }
-            set
-            {
-                _lblText = value;
-                OnPropertyChanged();
-            }
-        }
-
         public GoalsPage(GoalsDatabase goalsDatabase)
         {
             InitializeComponent();
@@ -41,6 +24,11 @@ namespace Streak
         protected override async void OnNavigatedTo(NavigatedToEventArgs args)
         {
             base.OnNavigatedTo(args);
+            RefreshGoals();
+        }
+
+        private async void RefreshGoals()
+        {
             var items = await database.GetGoalsAsync();
             MainThread.BeginInvokeOnMainThread(() =>
             {
@@ -84,7 +72,6 @@ namespace Streak
         Goal _currentSelectedGoal;
         async void OnItemPressed(object sender, EventArgs e)
         {
-            LblText = "OnItemPressed";
             // Get the goal
             var border = (Button)sender;
             _currentSelectedGoal = (Goal)border.BindingContext;
@@ -107,18 +94,16 @@ namespace Streak
         // Specify what you want to happen when the Elapsed event is raised.
         async void OnHeldEvent(object source, ElapsedEventArgs e)
         {
-            LblText = "OnHeldEvent";
             //Dispose of our current running timer
             _timer.Stop();
             //toggle the check
             _currentSelectedGoal.Checked = !_currentSelectedGoal.Checked;
             await database.SaveItemAsync(_currentSelectedGoal);
-            LblText = "held";
+            RefreshGoals();
         }
 
         async void OnItemReleased(object sender, EventArgs e)
         {
-            LblText = "OnItemReleased";
             stopWatch.Stop();
             _timer.Stop();
             //if its under the hold time otherwise this is handled by holding

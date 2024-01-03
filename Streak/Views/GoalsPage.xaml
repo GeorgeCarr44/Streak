@@ -8,7 +8,7 @@
     <ContentPage.Resources>
         <DataTemplate x:Key="checkedDataTemplate">
             <StackLayout FlexLayout.Basis="33%" Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
-                <Button Text="{Binding Checked}" BorderColor="Blue" BorderWidth="3" Pressed="OnItemPressed" Released="OnItemReleased" />
+                <Button BorderColor="Black" BorderWidth="0" Pressed="OnItemPressed" Released="OnItemReleased" />
                 <Label Text="{Binding Name}" 
                     HeightRequest="30" 
                     FontSize="18"
@@ -17,18 +17,18 @@
             </StackLayout>
         </DataTemplate>
         <DataTemplate x:Key="uncheckedDataTemplate">
-            <StackLayout FlexLayout.Basis="33%" Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
-                <Button Text="{Binding Checked}" BorderColor="Blue" BorderWidth="3" BackgroundColor="Transparent" Pressed="OnItemPressed" Released="OnItemReleased" />
+            <StackLayout  FlexLayout.Basis="33%" Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
+                <Button BorderColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" BorderWidth="3" Background="Transparent" Text="{Binding Checked}" Pressed="OnItemPressed" Released="OnItemReleased" />
                 <Label Text="{Binding Name}" 
-                    HeightRequest="30" 
-                    FontSize="18"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"/>
+        HeightRequest="30" 
+        FontSize="18"
+        HorizontalOptions="Center"
+        VerticalOptions="Center"/>
             </StackLayout>
         </DataTemplate>
         <DataTemplate x:Key="createButtonDataTemplate">
             <StackLayout FlexLayout.Basis="33%" Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
-                <Button Text="+" FontSize="Large" BorderColor="Blue" BorderWidth="3" Clicked="OnItemAdded"/>
+                <Button Text="+" FontSize="Large" Clicked="OnItemAdded"/>
             </StackLayout>
         </DataTemplate>
         <local:GoalTemplateSelector x:Key="goalTemplateSelector"
