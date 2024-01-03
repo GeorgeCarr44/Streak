@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace Streak.Models
 {
-    public class Completion
+    public class Completion(Goal goal)
     {
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
         [ForeignKey(nameof(Goal))]
-        public int GoalID { get; set; }
-        public DateTime CreationDate { get; set; }
+        public int GoalID { get; set; } = goal.ID;
+        public DateTime CreationDate { get; set; } = DateTime.Now;
     }
 }
