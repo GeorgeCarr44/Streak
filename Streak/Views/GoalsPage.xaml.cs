@@ -84,8 +84,13 @@ namespace Streak
             //Dispose of our current running timer
             _timer.Stop();
             //toggle the check
-            _currentSelectedGoal.Checked = !_currentSelectedGoal.Checked;
-            await database.SaveItemAsync(_currentSelectedGoal);
+            CompleteGoal(_currentSelectedGoal);
+        }
+
+        private async void CompleteGoal(Goal goal)
+        {
+            goal.Checked = !goal.Checked;
+            await database.SaveItemAsync(goal);
             RefreshGoals();
         }
 
