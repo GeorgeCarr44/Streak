@@ -33,7 +33,7 @@ public partial class EditGoalPage : ContentPage
             return;
         }
 
-        await database.SaveItemAsync(Goal);
+        await database.SaveGoalAsync(Goal);
         await Shell.Current.GoToAsync("..");
     }
 
@@ -41,7 +41,7 @@ public partial class EditGoalPage : ContentPage
     {
         if (Goal.ID == 0)
             return;
-        await database.DeleteItemAsync(Goal);
+        await database.DeleteGoalAsync(Goal);
         await Shell.Current.GoToAsync("..");
     }
 

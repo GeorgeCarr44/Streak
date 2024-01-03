@@ -90,7 +90,10 @@ namespace Streak
         private async void CompleteGoal(Goal goal)
         {
             goal.Checked = !goal.Checked;
-            await database.SaveItemAsync(goal);
+            await database.SaveGoalAsync(goal);
+
+            //Create a new 
+
             RefreshGoals();
         }
 
