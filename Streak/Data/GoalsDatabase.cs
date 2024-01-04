@@ -54,6 +54,7 @@ namespace Streak.Data
             // SQL queries are also possible
             //return await Database.QueryAsync<Goal>($"SELECT * FROM [Goal] WHERE [GoalID] = {goal.ID}");
         }
+
         public async Task<int> CreateCompletionAsync(Goal goal)
         {
             var completion = new Completion(goal);
