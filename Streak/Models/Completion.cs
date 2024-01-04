@@ -11,12 +11,27 @@ using System.Threading.Tasks;
 
 namespace Streak.Models
 {
-    public class Completion(Goal goal)
+    public class Completion
     {
+
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
         [ForeignKey(nameof(Goal))]
-        public int GoalID { get; set; } = goal.ID;
-        public DateTime CreationDate { get; set; } = DateTime.Now;
+        public int GoalID { get; set; }
+        public DateTime CreationDate { get; set; }
+
+        /// <summary>
+        /// This is the default constructor needed for database interaction
+        /// </summary>
+        public Completion()
+        {
+
+        }
+
+        public Completion(Goal goal)
+        {
+            this.GoalID = goal.ID;
+            this.CreationDate = DateTime.Now;
+        }
     }
 }
