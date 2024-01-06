@@ -83,8 +83,12 @@ namespace Streak
         {
             //Dispose of our current running timer
             _timer.Stop();
-            //toggle the check
-            CompleteGoal(_currentSelectedGoal);
+            //one a goal is done dont allow it to be checked again until tomorrow
+            if (!_currentSelectedGoal.Checked)
+            {
+                //toggle the check
+                CompleteGoal(_currentSelectedGoal);
+            }
         }
 
         private async void CompleteGoal(Goal goal)
