@@ -57,8 +57,14 @@ namespace Streak.Data
 
         public async Task<int> CreateCompletionAsync(Goal goal)
         {
+            await Init();
             var completion = new Completion(goal);
             return await Database.InsertAsync(completion);
+        }
+
+        private async Task<int> GetTodaysCompletionAsync(Goal goal)
+        {
+            return await Database.Table<Completion>().CountAsync();
         }
 
         public async Task<int> SaveCompletionAsync(Completion completion)
@@ -85,8 +91,31 @@ namespace Streak.Data
         public async Task<List<Goal>> GetGoalsAsync()
         {
             await Init();
-            return await Database.Table<Goal>().ToListAsync();
+
+
+            var goalscount = await Database.Table<Goal>().CountAsync();
+            var completionscount = await Database.Table<Completion>().CountAsync();
+            //Update Goals Current Checked
+            var goals = await Database.Table<Goal>().ToListAsync();
+            var completions = await Database.Table<Completion>().ToListAsync();
+
+            foreach (var goal in goals) {
+                var tets = await Database.Table<Completion>().Where(x => x.GoalID == goal.ID).ToListAsync();
+                if(tets.Any())
+                {
+                    bool b = tets.First().CreationDate == DateTime.Now.Date;
+                }
+                
+                //var thisC = await Database.Table<Completion>().CountAsync(x => x.GoalID == goal.ID && x.CreationDate.Date == DateTime.Now.Date);
+
+
+                //goal.Checked = GetTodaysCompletionAsync(goal).Result > 0;
+            }
+
+            return goals;
         }
+
+
 
         public async Task<int> SaveGoalAsync(Goal goal)
         {
@@ -97,6 +126,7 @@ namespace Streak.Data
             }
             else
             {
+                goal.CreationDate = DateTime.Now;
                 return await Database.InsertAsync(goal);
             }
         }

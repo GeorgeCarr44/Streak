@@ -34,11 +34,11 @@ namespace Streak
 
         private async void RefreshGoals()
         {
-            var items = await database.GetGoalsAsync();
+            var goals = await database.GetGoalsAsync();
             MainThread.BeginInvokeOnMainThread(() =>
             {
                 Goals.Clear();
-                foreach (var item in items)
+                foreach (var item in goals)
                 {
                     //Just for test data uncheck each
                     Goals.Add(item);
@@ -89,8 +89,6 @@ namespace Streak
 
         private async void CompleteGoal(Goal goal)
         {
-            goal.Checked = !goal.Checked;
-            await database.SaveGoalAsync(goal);
             await database.CreateCompletionAsync(goal);
 
             //Create a new 
