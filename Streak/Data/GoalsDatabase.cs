@@ -106,7 +106,7 @@ namespace Streak.Data
                     bool b = tets.First().CreationDate == DateTime.Now.Date;
                 }
                 
-                //var thisC = await Database.Table<Completion>().CountAsync(x => x.GoalID == goal.ID && x.CreationDate.Date == DateTime.Now.Date);
+                var thisC = await Database.Table<Completion>().CountAsync(x => x.GoalID == goal.ID && x.CreationDate == DateTime.Now.AddDays(-1));
 
 
                 //goal.Checked = GetTodaysCompletionAsync(goal).Result > 0;
