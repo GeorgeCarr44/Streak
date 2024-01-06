@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Streak.Models
 {
+    [Table("Goals")]
     public class Goal
     {
         [PrimaryKey, AutoIncrement]
@@ -18,45 +19,38 @@ namespace Streak.Models
         public DateTime CreationDate { get; set; }
         public string? Description { get; set; }
 
-        private bool _checked;
-        public bool Checked 
-        {
-            get
-            {
-                // has a check with this goal ID been created today?
-                // 
-                // There are a couple ways that this can be done,
-                //
-                // I could create a list of all the collections that link to this goal
-                // and look up how to set up database relationships
-                // I would worry that this would become too much data over time
-                //
-                // I could create a boolean sql method in the Database class which
-                // gets the top one of the completions where the goal id matched ordered by creation date
-                // This would be faster than loading every completetion
-                // I would worry that this has to run on every goal in the list
-                // meaning running multiple queries this could cause the data to
-                // load slowly when theres a lot of goals
-                //
-                // I could keep this simple checked boolean in the goals table and update it
-                // when its i create a new completion and when a new day has started
-                // the concern about this is the data becoming seperated and no longer aligning
-                // whats that point in having the completion table if im not going to use it
-                //
-                // Decision
-                // Do a boolean sql method
+        // has a check with this goal ID been created today?
+        // 
+        // There are a couple ways that this can be done,
+        //
+        // I could create a list of all the collections that link to this goal
+        // and look up how to set up database relationships
+        // I would worry that this would become too much data over time
+        //
+        // I could create a boolean sql method in the Database class which
+        // gets the top one of the completions where the goal id matched ordered by creation date
+        // This would be faster than loading every completetion
+        // I would worry that this has to run on every goal in the list
+        // meaning running multiple queries this could cause the data to
+        // load slowly when theres a lot of goals
+        //
+        // I could keep this simple checked boolean in the goals table and update it
+        // when its i create a new completion and when a new day has started
+        // the concern about this is the data becoming seperated and no longer aligning
+        // whats that point in having the completion table if im not going to use it
+        //
+        // Decision
+        // Do a boolean sql method but set this somewhere else dont do sql in getter.
 
-
-
-
-            }
-            set
-            {
-
-            }
-        }
+        // Currently looking into making a mapped relationship in sqlite
+        public bool Checked { get; set; }
+        
         public int CurrentStreak { get; set; }
         public int LongestStreak { get; set; }
 
+        public Goal()
+        {
+            this.CreationDate = DateTime.Now;
+        }
     }
 }
