@@ -91,31 +91,39 @@ namespace Streak.Data
         public async Task<List<Goal>> GetGoalsAsync()
         {
             await Init();
-
-
-            var goalscount = await Database.Table<Goal>().CountAsync();
-            var completionscount = await Database.Table<Completion>().CountAsync();
-            //Update Goals Current Checked
             var goals = await Database.Table<Goal>().ToListAsync();
-            var completions = await Database.Table<Completion>().ToListAsync();
-
-            foreach (var goal in goals) {
-                var tets = await Database.Table<Completion>().Where(x => x.GoalID == goal.ID).ToListAsync();
-                if(tets.Any())
-                {
-                    bool b = tets.First().CreationDate == DateTime.Now.Date;
-                }
-                
-                var thisC = await Database.Table<Completion>().CountAsync(x => x.GoalID == goal.ID && x.CreationDate == DateTime.Now.AddDays(-1));
-
-
-                //goal.Checked = GetTodaysCompletionAsync(goal).Result > 0;
-            }
-
+            foreach (var goal in goals) 
+                UpdateGoalsCheckedValue(goal);
             return goals;
         }
 
 
+        /// <summary>
+        /// This method refreshed the checked value on the goals
+        /// it does this by walking all goals
+        /// checking the completion table for each goal
+        /// evealuating if a completion has been entered for that goal today
+        /// it then saves the new value on the checked value on the goal in the database
+        /// this allows it to be data bound to the buttons in the ui
+        /// </summary>
+        /// <exception cref="NotImplementedException"></exception>
+        private async void UpdateGoalsCheckedValue(Goal goal)
+        {
+
+            var yesterday = DateTime.Today.AddDays(-1);
+            var tomorrow = DateTime.Today.AddDays(1);
+            // Having to do it this way because the database field doesnt allow
+            var thisC = await Database.Table<Completion>().CountAsync(x => x.GoalID == goal.ID && x.CreationDate > yesterday && x.CreationDate < tomorrow);
+            // if goal checked has changed
+            if (goal.Checked != thisC > 0)
+            {
+                // update the goals checked
+                // look at batching this in future
+                goal.Checked = thisC > 0;
+                // Save the goal
+                await SaveGoalAsync(goal);
+            }
+        }
 
         public async Task<int> SaveGoalAsync(Goal goal)
         {
