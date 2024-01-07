@@ -88,9 +88,7 @@ namespace Streak.Data
         {
             await Init();
             var goals = await Database.Table<Goal>().ToListAsync();
-            goals.OrderBy(x => x.Name);
-            goals.OrderBy(x => x.CurrentStreak);
-            foreach (var goal in goals)
+            foreach (var goal in goals.OrderBy(x => x.Name).OrderBy(x => x.CurrentStreak))
             {
                 //UpdateGoalsCheckedValue(goal);
                 UpdateGoalsCurrentStreak(goal);
