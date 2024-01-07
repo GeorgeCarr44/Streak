@@ -33,6 +33,8 @@ public partial class EditGoalPage : ContentPage
             return;
         }
 
+        Goal.Name = Goal.Name.Trim();
+
         await database.SaveGoalAsync(Goal);
         await Shell.Current.GoToAsync("..");
     }
