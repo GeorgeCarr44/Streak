@@ -87,12 +87,13 @@ namespace Streak.Data
         public async Task<List<Goal>> GetGoalsAsync()
         {
             await Init();
-            var goals = await Database.Table<Goal>().ToListAsync();
-            foreach (var goal in goals.OrderBy(x => x.Name).OrderBy(x => x.CurrentStreak))
+            var goals = await Database.Table<Goal>().OrderByDescending(x => x.CurrentStreak).ToListAsync();
+            foreach (var goal in goals)
             {
                 //UpdateGoalsCheckedValue(goal);
                 UpdateGoalsCurrentStreak(goal);
             }
+
             return goals;
         }
 
