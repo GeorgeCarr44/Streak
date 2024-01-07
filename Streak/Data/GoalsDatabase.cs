@@ -54,13 +54,7 @@ namespace Streak.Data
         {
             await Init();
             var completion = new Completion(goal);
-            // Increment the current streak
-            goal.CurrentStreak++;
-            // Update the longest streak if your on that run
-            if(goal.CurrentStreak > goal.LongestStreak)
-                goal.LongestStreak = goal.CurrentStreak;
 
-            await SaveGoalAsync(goal);
             return await Database.InsertAsync(completion);
         }
 
@@ -96,7 +90,7 @@ namespace Streak.Data
             var goals = await Database.Table<Goal>().ToListAsync();
             foreach (var goal in goals)
             {
-                UpdateGoalsCheckedValue(goal);
+                //UpdateGoalsCheckedValue(goal);
                 UpdateGoalsCurrentStreak(goal);
             }
             return goals;
@@ -104,29 +98,36 @@ namespace Streak.Data
 
         private async void UpdateGoalsCurrentStreak(Goal goal)
         {
-            //Get all completions
-            //var completions = await Database.Table<Completion>().Where(x => x.GoalID == goal.ID).OrderByDescending(x => x.CreationDate).ToListAsync();
+            // Get all completions for the goal
+            var completions = await Database.Table<Completion>().Where(x => x.GoalID == goal.ID).OrderByDescending(x => x.CreationDate).ToListAsync();
+            //This is for when the goals can be completed more than once
+            int goalDailyCompletionsRequired = 1;
+            var lower = DateTime.Today;
+            var upper = DateTime.Today.AddDays(1);
+            bool streakActive = completions.Where(x => x.CreationDate > lower && x.CreationDate < upper).Count() >= goalDailyCompletionsRequired;
+            int currentStreak = 0;
+            int testCount = completions.Where(x => x.CreationDate > lower && x.CreationDate < upper).Count();
 
-            // now i need to figure out what the current streak would be
-            // what is today
-            // has today had enough completions to warrent a streak?
-            // then recursivly check the day before until it fails
-            // counting the streak with each day that you meet the requirements
-            // this might end up being quite slow at some point but it will do for now
-            // i can always keep this method to validate the streak if i manually
-            // increase the current streak counter upon completions
-
-            // Actually maybe checking there would be a much easier and less intensive thing to do
-            // Im going to do this in a way where it might get out of sync
-
-            int expectedCompletions = 1;
-            //If the goal was not done yesterday then the streak needs to be reset
-            var reset = await GetYesterdaysCompletionCount(goal.ID) < expectedCompletions;
-            if (reset)
+            while (testCount >= goalDailyCompletionsRequired)
             {
-                //If the goal has been done today then the streak is 1
-                goal.CurrentStreak = goal.Checked ? 1 : 0;
+                //at least today is checked
+                goal.Checked = true;
+                //update the current streak
+                currentStreak++;
+                //then check the next day
+                lower = lower.AddDays(-1);
+                upper = upper.AddDays(-1);
+                testCount = completions.Where(x => x.CreationDate > lower && x.CreationDate < upper).Count();
             }
+            //set the current streak
+            goal.CurrentStreak = currentStreak;
+
+            // Update the longest streak if your on that run
+            if (goal.CurrentStreak > goal.LongestStreak)
+                goal.LongestStreak = goal.CurrentStreak;
+
+            await SaveGoalAsync(goal);
+
         }
 
 
