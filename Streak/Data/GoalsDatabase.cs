@@ -1,10 +1,5 @@
 ﻿using SQLite;
 using Streak.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Streak.Data
 {
@@ -59,6 +54,13 @@ namespace Streak.Data
         {
             await Init();
             var completion = new Completion(goal);
+            // Increment the current streak
+            goal.CurrentStreak++;
+            // Update the longest streak if your on that run
+            if(goal.CurrentStreak > goal.LongestStreak)
+                goal.LongestStreak = goal.CurrentStreak;
+
+            await SaveGoalAsync(goal);
             return await Database.InsertAsync(completion);
         }
 
@@ -102,8 +104,9 @@ namespace Streak.Data
 
         private async void UpdateGoalsCurrentStreak(Goal goal)
         {
-            var completions = await Database.Table<Completion>().Where(x => x.GoalID == goal.ID).OrderByDescending(x => x.CreationDate).ToListAsync();
-            
+            //Get all completions
+            //var completions = await Database.Table<Completion>().Where(x => x.GoalID == goal.ID).OrderByDescending(x => x.CreationDate).ToListAsync();
+
             // now i need to figure out what the current streak would be
             // what is today
             // has today had enough completions to warrent a streak?
@@ -113,10 +116,17 @@ namespace Streak.Data
             // i can always keep this method to validate the streak if i manually
             // increase the current streak counter upon completions
 
-            // Actually maybe checkingt there would be a much easier and less internsive thing to do
-            // 
+            // Actually maybe checking there would be a much easier and less intensive thing to do
+            // Im going to do this in a way where it might get out of sync
 
-
+            int expectedCompletions = 1;
+            //If the goal was not done yesterday then the streak needs to be reset
+            var reset = await GetYesterdaysCompletionCount(goal.ID) < expectedCompletions;
+            if (reset)
+            {
+                //If the goal has been done today then the streak is 1
+                goal.CurrentStreak = goal.Checked ? 1 : 0;
+            }
         }
 
 
@@ -131,14 +141,8 @@ namespace Streak.Data
         /// <exception cref="NotImplementedException"></exception>
         private async void UpdateGoalsCheckedValue(Goal goal)
         {
-
-            var today = DateTime.Today;
-            var tomorrow = DateTime.Today.AddDays(1);
-            
-
             // Having to do it this way because the database field doesnt allow
-            var todaysCheckCount = await Database.Table<Completion>().CountAsync(x => x.GoalID == goal.ID && x.CreationDate > today && x.CreationDate < tomorrow);
-
+            int todaysCheckCount = await GetTodaysCompletionCount(goal.ID);
             // if goal checked has changed
             if (goal.Checked != todaysCheckCount > 0)
             {
@@ -149,6 +153,26 @@ namespace Streak.Data
                 await SaveGoalAsync(goal);
             }
         }
+
+        private async Task<int> GetTodaysCompletionCount(int goalID)
+        {
+            var today = DateTime.Today;
+            var tomorrow = DateTime.Today.AddDays(1);
+
+            return await GetCompletionCountBetweenDates(goalID, today, tomorrow);
+        }
+        private async Task<int> GetYesterdaysCompletionCount(int goalID)
+        {
+            var yesterday = DateTime.Today.AddDays(-1);
+            var today = DateTime.Today;
+            return await GetCompletionCountBetweenDates(goalID, yesterday, today);
+        }
+
+        private async Task<int> GetCompletionCountBetweenDates(int goalID, DateTime lowerBound, DateTime upperBound)
+        {
+            return await Database.Table<Completion>().CountAsync(x => x.GoalID == goalID && x.CreationDate > lowerBound && x.CreationDate < upperBound);
+        }
+
 
         public async Task<int> SaveGoalAsync(Goal goal)
         {
