@@ -110,16 +110,19 @@ namespace Streak.Data
         private async void UpdateGoalsCheckedValue(Goal goal)
         {
 
-            var yesterday = DateTime.Today.AddDays(-1);
+            var today = DateTime.Today;
             var tomorrow = DateTime.Today.AddDays(1);
+            var test = await Database.Table<Completion>().ToListAsync();
+
             // Having to do it this way because the database field doesnt allow
-            var thisC = await Database.Table<Completion>().CountAsync(x => x.GoalID == goal.ID && x.CreationDate > yesterday && x.CreationDate < tomorrow);
+            var todaysCheckCount = await Database.Table<Completion>().CountAsync(x => x.GoalID == goal.ID && x.CreationDate > today && x.CreationDate < tomorrow);
+
             // if goal checked has changed
-            if (goal.Checked != thisC > 0)
+            if (goal.Checked != todaysCheckCount > 0)
             {
                 // update the goals checked
                 // look at batching this in future
-                goal.Checked = thisC > 0;
+                goal.Checked = todaysCheckCount > 0;
                 // Save the goal
                 await SaveGoalAsync(goal);
             }
