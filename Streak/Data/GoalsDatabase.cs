@@ -92,9 +92,31 @@ namespace Streak.Data
         {
             await Init();
             var goals = await Database.Table<Goal>().ToListAsync();
-            foreach (var goal in goals) 
+            foreach (var goal in goals)
+            {
                 UpdateGoalsCheckedValue(goal);
+                UpdateGoalsCurrentStreak(goal);
+            }
             return goals;
+        }
+
+        private async void UpdateGoalsCurrentStreak(Goal goal)
+        {
+            var completions = await Database.Table<Completion>().Where(x => x.GoalID == goal.ID).OrderByDescending(x => x.CreationDate).ToListAsync();
+            
+            // now i need to figure out what the current streak would be
+            // what is today
+            // has today had enough completions to warrent a streak?
+            // then recursivly check the day before until it fails
+            // counting the streak with each day that you meet the requirements
+            // this might end up being quite slow at some point but it will do for now
+            // i can always keep this method to validate the streak if i manually
+            // increase the current streak counter upon completions
+
+            // Actually maybe checkingt there would be a much easier and less internsive thing to do
+            // 
+
+
         }
 
 
@@ -112,7 +134,7 @@ namespace Streak.Data
 
             var today = DateTime.Today;
             var tomorrow = DateTime.Today.AddDays(1);
-            var test = await Database.Table<Completion>().ToListAsync();
+            
 
             // Having to do it this way because the database field doesnt allow
             var todaysCheckCount = await Database.Table<Completion>().CountAsync(x => x.GoalID == goal.ID && x.CreationDate > today && x.CreationDate < tomorrow);
