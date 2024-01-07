@@ -131,45 +131,6 @@ namespace Streak.Data
 
         }
 
-
-        /// <summary>
-        /// This method refreshed the checked value on the goals
-        /// it does this by walking all goals
-        /// checking the completion table for each goal
-        /// evealuating if a completion has been entered for that goal today
-        /// it then saves the new value on the checked value on the goal in the database
-        /// this allows it to be data bound to the buttons in the ui
-        /// </summary>
-        /// <exception cref="NotImplementedException"></exception>
-        private async void UpdateGoalsCheckedValue(Goal goal)
-        {
-            // Having to do it this way because the database field doesnt allow
-            int todaysCheckCount = await GetTodaysCompletionCount(goal.ID);
-            // if goal checked has changed
-            if (goal.Checked != todaysCheckCount > 0)
-            {
-                // update the goals checked
-                // look at batching this in future
-                goal.Checked = todaysCheckCount > 0;
-                // Save the goal
-                await SaveGoalAsync(goal);
-            }
-        }
-
-        private async Task<int> GetTodaysCompletionCount(int goalID)
-        {
-            var today = DateTime.Today;
-            var tomorrow = DateTime.Today.AddDays(1);
-
-            return await GetCompletionCountBetweenDates(goalID, today, tomorrow);
-        }
-        private async Task<int> GetYesterdaysCompletionCount(int goalID)
-        {
-            var yesterday = DateTime.Today.AddDays(-1);
-            var today = DateTime.Today;
-            return await GetCompletionCountBetweenDates(goalID, yesterday, today);
-        }
-
         private async Task<int> GetCompletionCountBetweenDates(int goalID, DateTime lowerBound, DateTime upperBound)
         {
             return await Database.Table<Completion>().CountAsync(x => x.GoalID == goalID && x.CreationDate > lowerBound && x.CreationDate < upperBound);
