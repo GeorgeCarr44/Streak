@@ -105,14 +105,20 @@ namespace Streak.Data
             int goalDailyCompletionsRequired = 1;
             var lower = DateTime.Today;
             var upper = DateTime.Today.AddDays(1);
-            bool streakActive = completions.Where(x => x.CreationDate > lower && x.CreationDate < upper).Count() >= goalDailyCompletionsRequired;
-            int currentStreak = 0;
+
+            //set todays check
+            goal.Checked = completions.Where(x => x.CreationDate > lower && x.CreationDate < upper).Count() >= goalDailyCompletionsRequired;
+            int currentStreak = goal.Checked ? 1 : 0;
+
+
+            //then check the previous day to see if were currently working on a streak
+            lower = lower.AddDays(-1);
+            upper = upper.AddDays(-1);
             int testCount = completions.Where(x => x.CreationDate > lower && x.CreationDate < upper).Count();
 
+            // or first?
             while (testCount >= goalDailyCompletionsRequired)
             {
-                //at least today is checked
-                goal.Checked = true;
                 //update the current streak
                 currentStreak++;
                 //then check the next day
