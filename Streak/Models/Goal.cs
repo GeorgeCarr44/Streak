@@ -48,6 +48,15 @@ namespace Streak.Models
         public int CurrentStreak { get; set; }
         public int LongestStreak { get; set; }
 
+        // Selecting indiviual days
+        public bool Monday { get; set; }
+        public bool Tuesday { get; set; }
+        public bool Wednesday { get; set; }
+        public bool Thursday { get; set; }
+        public bool Friday { get; set; }
+        public bool Saturday { get; set; }
+        public bool Sunday { get; set; }
+
         public Goal()
         {
             this.CreationDate = DateTime.Now;
