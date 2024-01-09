@@ -44,7 +44,7 @@
 
     </ContentPage.Resources>
     <ScrollView>
-    <StackLayout w Padding="10, 0">
+    <StackLayout Padding="10, 0">
         <Label Text="Streak"/>
             <FlexLayout BindableLayout.ItemsSource="{Binding Goals}" 
                         BindableLayout.ItemTemplateSelector="{StaticResource goalTemplateSelector}"
