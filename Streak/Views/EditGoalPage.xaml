@@ -18,14 +18,18 @@
             <Label Text="CurrentStreak" />
             <Label Text="{Binding CurrentStreak}" />
             <Label Text="LongestStreak" />
-            <Label Text="{Binding LongestStreak}" />            
-            <Button Text="Save" Clicked="OnSaveClicked" />
-            <Button 
-                x:Name="deleteButton"
-                Text="Delete"
-                Clicked="OnDeleteClicked" />
-            <Button Text="Cancel"
-                    Clicked="OnCancelClicked" />
+            <Label Text="{Binding LongestStreak}" />
+            <HorizontalStackLayout HorizontalOptions="Center">
+                <Button Text="Save" Clicked="OnSaveClicked" Margin="20"/>
+                <Button 
+                    x:Name="deleteButton"
+                    Text="Delete"
+                    Margin="20"
+                    Clicked="OnDeleteClicked" />
+                <Button Text="Cancel"
+                        Margin="20"
+                        Clicked="OnCancelClicked" />
+            </HorizontalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
