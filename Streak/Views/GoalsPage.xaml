@@ -43,12 +43,14 @@
                                   CreateButtonTemplate="{StaticResource createButtonDataTemplate}" />
 
     </ContentPage.Resources>
-    <StackLayout Padding="10, 0">
-        <Label Text="{Binding LblText}"/>
-        <FlexLayout BindableLayout.ItemsSource="{Binding Goals}" 
-                    BindableLayout.ItemTemplateSelector="{StaticResource goalTemplateSelector}"
-                    Direction="Row" 
-                    Wrap="Wrap" 
-                    AlignContent="Start"/>
+    <ScrollView>
+    <StackLayout w Padding="10, 0">
+        <Label Text="Streak"/>
+            <FlexLayout BindableLayout.ItemsSource="{Binding Goals}" 
+                        BindableLayout.ItemTemplateSelector="{StaticResource goalTemplateSelector}"
+                        Direction="Row" 
+                        Wrap="Wrap" 
+                        AlignContent="Start"/>
     </StackLayout>
+    </ScrollView>
 </ContentPage>
