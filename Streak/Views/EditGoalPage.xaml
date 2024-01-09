@@ -11,8 +11,15 @@
                              VerticalOptions="StartAndExpand">
             <Label Text="Name" />
             <Entry Text="{Binding Name}" />
-            <Button Text="Save"
-                    Clicked="OnSaveClicked" />
+            <Label Text="Description" />
+            <Entry Text="{Binding Description}" />
+            <Label Text="CreationDate" />
+            <Label Text="{Binding CreationDate}" />
+            <Label Text="CurrentStreak" />
+            <Label Text="{Binding CurrentStreak}" />
+            <Label Text="LongestStreak" />
+            <Label Text="{Binding LongestStreak}" />            
+            <Button Text="Save" Clicked="OnSaveClicked" />
             <Button 
                 x:Name="deleteButton"
                 Text="Delete"
