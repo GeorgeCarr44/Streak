@@ -19,6 +19,26 @@
             <Label Text="{Binding CurrentStreak}" />
             <Label Text="LongestStreak" />
             <Label Text="{Binding LongestStreak}" />
+            
+            <Picker
+                Title="Testing"
+                ItemsSource="{Binding FrequencyNames}"
+                SelectedIndex="{Binding SelectedFrequencyID}"/>
+            <CheckBox Color="#0B4C90" IsChecked="{Binding Monday}">
+            </CheckBox>
+            <CheckBox Color="#0B4C90" IsChecked="{Binding Tuesday}">
+            </CheckBox>
+            <CheckBox Color="#0B4C90" IsChecked="{Binding Wednesday}">
+            </CheckBox>
+            <CheckBox Color="#0B4C90" IsChecked="{Binding Thursday}">
+            </CheckBox>
+            <CheckBox Color="#0B4C90" IsChecked="{Binding Friday}">
+            </CheckBox>
+            <CheckBox Color="#0B4C90" IsChecked="{Binding Saturday}">
+            </CheckBox>
+            <CheckBox Color="#0B4C90" IsChecked="{Binding Sunday}">
+            </CheckBox>
+            
             <HorizontalStackLayout HorizontalOptions="Center">
                 <Button Text="Save" Clicked="OnSaveClicked" Margin="20"/>
                 <Button 

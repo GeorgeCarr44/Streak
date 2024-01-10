@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Streak.Models
@@ -48,6 +49,18 @@ namespace Streak.Models
         public int CurrentStreak { get; set; }
         public int LongestStreak { get; set; }
 
+        public int SelectedFrequencyID { get; set; }
+
+        public List<string> FrequencyNames
+        {
+            get
+            {
+                return Enum.GetNames(typeof(GoalFrequency)).Select(b => Regex.Replace(b, "(\\B[A-Z])", " $1")).ToList();
+            }
+        }
+
+
+        public GoalFrequency Frequency { get; set; }
         // Selecting indiviual days
         public bool Monday { get; set; }
         public bool Tuesday { get; set; }
