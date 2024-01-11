@@ -93,13 +93,39 @@ namespace Streak.Data
         {
             await Init();
             var goals = await Database.Table<Goal>().OrderByDescending(x => x.CurrentStreak).ToListAsync();
-            //foreach (var goal in goals)
-            //{
-                //UpdateGoalsCheckedValue(goal);
+
+            //Get todays completions
+
+
+            foreach (var goal in goals)
+            {
+                UpdateGoalsCheckedValue(goal);
                 //UpdateGoalsCurrentStreak(goal);
-            //}
+            }
 
             return goals;
+        }
+
+        private async void UpdateGoalsCheckedValue(Goal goal)
+        {
+            int todaysCheckCount = await GetTodaysCompletionCount(goal.ID);
+            // if goal checked has changed
+            if (goal.Checked != todaysCheckCount > 0)
+            {
+                // update the goals checked
+                // look at batching this in future
+                goal.Checked = todaysCheckCount > 0;
+                // Save the goal
+                await SaveGoalAsync(goal);
+            }
+        }
+
+        private async Task<int> GetTodaysCompletionCount(int goalID)
+        {
+            var today = DateTime.Today;
+            var tomorrow = DateTime.Today.AddDays(1);
+
+            return await GetCompletionCountBetweenDates(goalID, today, tomorrow);
         }
 
         private async void UpdateGoalsCurrentStreak(Goal goal)
