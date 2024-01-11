@@ -55,7 +55,12 @@ namespace Streak.Data
             await Init();
             var completion = new Completion(goal);
 
-            return await Database.InsertAsync(completion);
+            var rowsAdded = await Database.InsertAsync(completion);
+
+            UpdateGoalsCurrentStreak(goal);
+
+            return rowsAdded;
+
         }
 
         private async Task<int> GetTodaysCompletionAsync(Goal goal)
@@ -88,11 +93,11 @@ namespace Streak.Data
         {
             await Init();
             var goals = await Database.Table<Goal>().OrderByDescending(x => x.CurrentStreak).ToListAsync();
-            foreach (var goal in goals)
-            {
+            //foreach (var goal in goals)
+            //{
                 //UpdateGoalsCheckedValue(goal);
-                UpdateGoalsCurrentStreak(goal);
-            }
+                //UpdateGoalsCurrentStreak(goal);
+            //}
 
             return goals;
         }
