@@ -24,32 +24,63 @@
                 Title="Testing"
                 ItemsSource="{Binding FrequencyNames}"
                 SelectedIndex="{Binding SelectedFrequencyID}"/>
-            <CheckBox Color="#0B4C90" IsChecked="{Binding Monday}">
-            </CheckBox>
-            <CheckBox Color="#0B4C90" IsChecked="{Binding Tuesday}">
-            </CheckBox>
-            <CheckBox Color="#0B4C90" IsChecked="{Binding Wednesday}">
-            </CheckBox>
-            <CheckBox Color="#0B4C90" IsChecked="{Binding Thursday}">
-            </CheckBox>
-            <CheckBox Color="#0B4C90" IsChecked="{Binding Friday}">
-            </CheckBox>
-            <CheckBox Color="#0B4C90" IsChecked="{Binding Saturday}">
-            </CheckBox>
-            <CheckBox Color="#0B4C90" IsChecked="{Binding Sunday}">
-            </CheckBox>
+
+            <StackLayout Orientation="Horizontal">
+                <Label VerticalOptions="Center" Text="Monday:"/>
+                <CheckBox VerticalOptions="Center" IsChecked="{Binding Monday}"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <Label VerticalOptions="Center" Text="Tuesday:"/>
+                <CheckBox VerticalOptions="Center" IsChecked="{Binding Tuesday}"/>
+            </StackLayout>
             
-            <HorizontalStackLayout HorizontalOptions="Center">
-                <Button Text="Save" Clicked="OnSaveClicked" Margin="20"/>
+            <StackLayout Orientation="Horizontal">
+                <Label VerticalOptions="Center" Text="Wednesday:"/>
+                <CheckBox VerticalOptions="Center" IsChecked="{Binding Wednesday}"/>
+            </StackLayout>
+            
+            <StackLayout Orientation="Horizontal">
+                <Label VerticalOptions="Center" Text="Thursday:"/>
+                <CheckBox VerticalOptions="Center" IsChecked="{Binding Thursday}"/>
+            </StackLayout>
+            
+            <StackLayout Orientation="Horizontal">
+                <Label VerticalOptions="Center" Text="Friday:"/>
+                <CheckBox VerticalOptions="Center" IsChecked="{Binding Friday}"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <Label VerticalOptions="Center" Text="Saturday:"/>
+                <CheckBox VerticalOptions="Center" IsChecked="{Binding Saturday}"/>
+            </StackLayout>
+            
+            <StackLayout Orientation="Horizontal">
+                <Label VerticalOptions="Center" Text="Sunday:"/>
+                <CheckBox VerticalOptions="Center" IsChecked="{Binding Sunday}"/>
+            </StackLayout>
+
+            
+            <FlexLayout Direction="Row" JustifyContent="SpaceEvenly">
+                
+                <Button  
+                    WidthRequest="100"
+                    HeightRequest="100"
+                    HorizontalOptions="Start" Text="Save" Clicked="OnSaveClicked"/>
                 <Button 
+                    WidthRequest="100"
+                    HeightRequest="100"
+                   
                     x:Name="deleteButton"
                     Text="Delete"
-                    Margin="20"
                     Clicked="OnDeleteClicked" />
                 <Button Text="Cancel"
-                        Margin="20"
+                        WidthRequest="100"
+                        HeightRequest="100"
+                        HorizontalOptions="End"
+                        
                         Clicked="OnCancelClicked" />
-            </HorizontalStackLayout>
+            </FlexLayout>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
