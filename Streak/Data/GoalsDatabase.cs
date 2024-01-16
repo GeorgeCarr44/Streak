@@ -54,7 +54,10 @@ namespace Streak.Data
         {
             await Init();
             var completion = new Completion(goal);
-
+            //Check this current goal and update the streak
+            goal.Checked = true;
+            goal.CurrentStreak++;
+            await SaveGoalAsync(goal);
             return await Database.InsertAsync(completion);
         }
 
