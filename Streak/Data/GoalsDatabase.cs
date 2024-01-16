@@ -99,6 +99,8 @@ namespace Streak.Data
 
             foreach (var goal in goals)
             {
+                // This can be improved in the future to become much faster
+
                 //UpdateGoalsCheckedValue(goal);
                 UpdateGoalsCurrentStreak(goal);
             }

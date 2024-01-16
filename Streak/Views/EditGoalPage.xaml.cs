@@ -22,7 +22,30 @@ public partial class EditGoalPage : ContentPage
     protected override async void OnAppearing()
     {
         deleteButton.IsVisible = Goal.ID != 0;
+        RefreshDaysOfTheWeek();
         base.OnAppearing();
+    }
+
+    private void RefreshDaysOfTheWeek()
+    {
+        var gf = (GoalFrequency)Goal.SelectedFrequencyID;
+        switch (gf)
+        {
+            case GoalFrequency.EveryDay:
+            case GoalFrequency.EveryOtherDay:
+                // Hide Buttons
+                DaysOfTheWeek.IsVisible = false;
+                break;
+            case GoalFrequency.SelectDayOfWeek:
+                // Show Buttons
+                DaysOfTheWeek.IsVisible = true;
+                break;
+        }
+    }
+
+    void OnFrequencyChange(object sender, EventArgs e)
+    {
+        RefreshDaysOfTheWeek();
     }
 
     async void OnSaveClicked(object sender, EventArgs e)

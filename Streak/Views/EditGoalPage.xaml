@@ -23,41 +23,44 @@
             <Picker
                 Title="Testing"
                 ItemsSource="{Binding FrequencyNames}"
-                SelectedIndex="{Binding SelectedFrequencyID}"/>
+                SelectedIndex="{Binding SelectedFrequencyID}"
+                SelectedIndexChanged="OnFrequencyChange"
+                />
+            <StackLayout x:Name="DaysOfTheWeek">
+                <StackLayout Orientation="Horizontal">
+                    <Label VerticalOptions="Center" Text="Monday:"/>
+                    <CheckBox VerticalOptions="Center" IsChecked="{Binding Monday}"/>
+                </StackLayout>
 
-            <StackLayout Orientation="Horizontal">
-                <Label VerticalOptions="Center" Text="Monday:"/>
-                <CheckBox VerticalOptions="Center" IsChecked="{Binding Monday}"/>
-            </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label VerticalOptions="Center" Text="Tuesday:"/>
+                    <CheckBox VerticalOptions="Center" IsChecked="{Binding Tuesday}"/>
+                </StackLayout>
+            
+                <StackLayout Orientation="Horizontal">
+                    <Label VerticalOptions="Center" Text="Wednesday:"/>
+                    <CheckBox VerticalOptions="Center" IsChecked="{Binding Wednesday}"/>
+                </StackLayout>
+            
+                <StackLayout Orientation="Horizontal">
+                    <Label VerticalOptions="Center" Text="Thursday:"/>
+                    <CheckBox VerticalOptions="Center" IsChecked="{Binding Thursday}"/>
+                </StackLayout>
+            
+                <StackLayout Orientation="Horizontal">
+                    <Label VerticalOptions="Center" Text="Friday:"/>
+                    <CheckBox VerticalOptions="Center" IsChecked="{Binding Friday}"/>
+                </StackLayout>
 
-            <StackLayout Orientation="Horizontal">
-                <Label VerticalOptions="Center" Text="Tuesday:"/>
-                <CheckBox VerticalOptions="Center" IsChecked="{Binding Tuesday}"/>
-            </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label VerticalOptions="Center" Text="Saturday:"/>
+                    <CheckBox VerticalOptions="Center" IsChecked="{Binding Saturday}"/>
+                </StackLayout>
             
-            <StackLayout Orientation="Horizontal">
-                <Label VerticalOptions="Center" Text="Wednesday:"/>
-                <CheckBox VerticalOptions="Center" IsChecked="{Binding Wednesday}"/>
-            </StackLayout>
-            
-            <StackLayout Orientation="Horizontal">
-                <Label VerticalOptions="Center" Text="Thursday:"/>
-                <CheckBox VerticalOptions="Center" IsChecked="{Binding Thursday}"/>
-            </StackLayout>
-            
-            <StackLayout Orientation="Horizontal">
-                <Label VerticalOptions="Center" Text="Friday:"/>
-                <CheckBox VerticalOptions="Center" IsChecked="{Binding Friday}"/>
-            </StackLayout>
-
-            <StackLayout Orientation="Horizontal">
-                <Label VerticalOptions="Center" Text="Saturday:"/>
-                <CheckBox VerticalOptions="Center" IsChecked="{Binding Saturday}"/>
-            </StackLayout>
-            
-            <StackLayout Orientation="Horizontal">
-                <Label VerticalOptions="Center" Text="Sunday:"/>
-                <CheckBox VerticalOptions="Center" IsChecked="{Binding Sunday}"/>
+                <StackLayout Orientation="Horizontal">
+                    <Label VerticalOptions="Center" Text="Sunday:"/>
+                    <CheckBox VerticalOptions="Center" IsChecked="{Binding Sunday}"/>
+                </StackLayout>
             </StackLayout>
 
             

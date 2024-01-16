@@ -59,8 +59,6 @@ namespace Streak.Models
             }
         }
 
-
-        public GoalFrequency Frequency { get; set; }
         // Selecting indiviual days
         public bool Monday { get; set; }
         public bool Tuesday { get; set; }
