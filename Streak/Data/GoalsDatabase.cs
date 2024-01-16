@@ -99,8 +99,8 @@ namespace Streak.Data
 
             foreach (var goal in goals)
             {
-                UpdateGoalsCheckedValue(goal);
-                //UpdateGoalsCurrentStreak(goal);
+                //UpdateGoalsCheckedValue(goal);
+                UpdateGoalsCurrentStreak(goal);
             }
 
             return goals;
