@@ -38,15 +38,52 @@ namespace Streak
             MainThread.BeginInvokeOnMainThread(() =>
             {
                 Goals.Clear();
-                foreach (var item in goals)
+                foreach (var g in goals)
                 {
                     //Just for test data uncheck each
-                    Goals.Add(item);
+                    if (GoalDisplays(g))
+                    {
+                        Goals.Add(g);
+                    }
                 }
 
                 //This is the new goal button
                 Goals.Add(new Goal() { ID = 0, Name = "New Goal" });
             });
+        }
+
+        private bool GoalDisplays(Goal g)
+        {
+            switch ((GoalFrequency)g.SelectedFrequencyID)
+            {
+                case GoalFrequency.EveryOtherDay:
+                    //(DateTime.Now - g.CreationDate).TotalDays
+                    //This gets the age of the goal in days
+                    //does a mod to determine if its an even or of number of days
+                    //if it is even then it shows
+                    return ((DateTime.Now - g.CreationDate).Days % 2) == 0;
+                case GoalFrequency.SelectDayOfWeek:
+                    DayOfWeek dow = DateTime.Now.DayOfWeek;
+                    if (dow == DayOfWeek.Monday && g.Monday)
+                        return true;
+                    if(dow == DayOfWeek.Tuesday && g.Tuesday)
+                        return true;
+                    if(dow == DayOfWeek.Wednesday && g.Wednesday)
+                        return true; 
+                    if (dow == DayOfWeek.Thursday && g.Thursday)
+                        return true;
+                    if(dow == DayOfWeek.Friday && g.Friday)
+                        return true;
+                    if(dow == DayOfWeek.Saturday && g.Saturday)
+                        return true; 
+                    if(dow == DayOfWeek.Sunday && g.Sunday)
+                        return true; 
+
+                    return false;
+                case GoalFrequency.EveryDay: 
+                default:
+                    return true;
+            }
         }
 
         async void OnItemAdded(object sender, EventArgs e)
