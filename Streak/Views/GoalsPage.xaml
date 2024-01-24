@@ -22,7 +22,7 @@
                         BorderWidth="3" 
                         Background="Transparent" 
                         Text="{Binding CurrentStreak}" 
-                        TextColor="Black" 
+                        
                         Pressed="OnItemPressed" 
                         Released="OnItemReleased" />
                 <Label Text="{Binding Name}" 
