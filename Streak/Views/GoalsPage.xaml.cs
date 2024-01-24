@@ -34,6 +34,7 @@ namespace Streak
 
         private async Task RefreshGoals()
         {
+
             var goals = await database.GetGoalsAsync();
             MainThread.BeginInvokeOnMainThread(() =>
             {
