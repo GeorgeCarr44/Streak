@@ -29,10 +29,10 @@ namespace Streak
         protected override async void OnNavigatedTo(NavigatedToEventArgs args)
         {
             base.OnNavigatedTo(args);
-            RefreshGoals();
+            await RefreshGoals();
         }
 
-        private async void RefreshGoals()
+        private async Task RefreshGoals()
         {
             var goals = await database.GetGoalsAsync();
             MainThread.BeginInvokeOnMainThread(() =>
@@ -87,16 +87,16 @@ namespace Streak
             if (!_currentSelectedGoal.Checked)
             {
                 //toggle the check
-                CompleteGoal(_currentSelectedGoal);
+                await CompleteGoal(_currentSelectedGoal);
             }
         }
 
-        private async void CompleteGoal(Goal goal)
+        private async Task CompleteGoal(Goal goal)
         {
-            await database.CreateCompletionAsync(goal);
-
+            var completionsAddedCount = database.CreateCompletionAsync(goal);
             //Create a new 
-            RefreshGoals();
+            await completionsAddedCount;
+            await RefreshGoals();
         }
 
         async void OnItemReleased(object sender, EventArgs e)
