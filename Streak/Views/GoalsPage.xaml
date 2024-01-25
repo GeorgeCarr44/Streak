@@ -22,7 +22,7 @@
                         BorderWidth="3" 
                         Background="Transparent" 
                         Text="{Binding CurrentStreak}" 
-                        
+                        TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource PrimaryDarkText}}" 
                         Pressed="OnItemPressed" 
                         Released="OnItemReleased" />
                 <Label Text="{Binding Name}" 
