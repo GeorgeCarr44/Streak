@@ -36,6 +36,12 @@ namespace Streak
         {
 
             var goals = await database.GetGoalsAsync();
+
+            //foreach (var goal in goals)
+            //{
+            //    goal.Checked = true;
+            //}
+
             MainThread.BeginInvokeOnMainThread(() =>
             {
                 Goals.Clear();
@@ -94,6 +100,17 @@ namespace Streak
                 ["Goal"] = new Goal()
             });
         }
+
+        async void CheckAllGoals(object sender, EventArgs e)
+        { 
+            // Get the goal
+            foreach(Goal g in Goals)
+            {
+                g.Checked = true;
+                await database.SaveGoalAsync(g);
+            }
+        }
+
 
         async void OnItemPressed(object sender, EventArgs e)
         {
