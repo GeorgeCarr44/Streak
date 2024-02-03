@@ -34,16 +34,10 @@ namespace Streak
 
         private async Task RefreshGoals()
         {
-
             var goals = await database.GetGoalsAsync();
 
-            //foreach (var goal in goals)
-            //{
-            //    goal.Checked = true;
-            //}
+            MainThread.BeginInvokeOnMainThread(() => { 
 
-            MainThread.BeginInvokeOnMainThread(() =>
-            {
                 Goals.Clear();
                 foreach (var g in goals)
                 {
@@ -102,12 +96,12 @@ namespace Streak
         }
 
         async void CheckAllGoals(object sender, EventArgs e)
-        { 
+        {
             // Get the goal
-            foreach(Goal g in Goals)
+            for (int i = 0; i < Goals.Count - 1; i++)
             {
-                g.Checked = true;
-                await database.SaveGoalAsync(g);
+                Goals[i].Checked = true;
+                await database.SaveGoalAsync(Goals[i]);
             }
         }
 
@@ -141,7 +135,6 @@ namespace Streak
             //one a goal is done dont allow it to be checked again until tomorrow
             if (!_currentSelectedGoal.Checked)
             {
-                //toggle the check
                 await CompleteGoal(_currentSelectedGoal);
             }
         }
