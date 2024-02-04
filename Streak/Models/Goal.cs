@@ -49,6 +49,8 @@ namespace Streak.Models
         public int CurrentStreak { get; set; }
         public int LongestStreak { get; set; }
 
+        public int OrderID { get; set; }
+
         public int SelectedFrequencyID { get; set; }
 
         public List<string> FrequencyNames

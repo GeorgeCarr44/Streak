@@ -92,7 +92,7 @@ namespace Streak.Data
         public async Task<List<Goal>> GetGoalsAsync()
         {
             await Init();
-            var goals = await Database.Table<Goal>().OrderByDescending(x => x.CurrentStreak).ToListAsync();
+            var goals = await Database.Table<Goal>().ToListAsync();
 
             //Get todays completions
             foreach (var goal in goals)
@@ -139,21 +139,36 @@ namespace Streak.Data
             goal.Checked = completions.Where(x => x.CreationDate > lower && x.CreationDate < upper).Count() >= goalDailyCompletionsRequired;
             int currentStreak = goal.Checked ? 1 : 0;
 
+            //then check the previous opportunity to check the streak
 
-            //then check the previous day to see if were currently working on a streak
-            lower = lower.AddDays(-1);
-            upper = upper.AddDays(-1);
-            int testCount = completions.Where(x => x.CreationDate > lower && x.CreationDate < upper).Count();
+            switch (goal.SelectedFrequencyID)
+            {
+                case (int)GoalFrequency.EveryDay:
 
-            // or first?
-            while (testCount >= goalDailyCompletionsRequired)
+                    break;
+                case (int)GoalFrequency.EveryOtherDay:
+
+                    break;
+                case (int)GoalFrequency.SelectDayOfWeek:
+
+                    break;
+            }
+
+            //check the next day
+            bool continueChecking = true;
+            
+            while (continueChecking)
             {
                 //update the current streak
-                currentStreak++;
                 //then check the next day
                 lower = lower.AddDays(-1);
                 upper = upper.AddDays(-1);
-                testCount = completions.Where(x => x.CreationDate > lower && x.CreationDate < upper).Count();
+
+                int countQualify = completions.Where(x => x.CreationDate > lower && x.CreationDate < upper).Count();
+
+                continueChecking = goalDailyCompletionsRequired <= countQualify;
+                if (continueChecking )
+                    currentStreak++;
             }
             //set the current streak
             goal.CurrentStreak = currentStreak;
