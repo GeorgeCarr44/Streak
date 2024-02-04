@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Streak.Data;
+﻿using Streak.Data;
 using Streak.Models;
 using Streak.Views;
 using System.Collections.ObjectModel;
@@ -42,7 +41,7 @@ namespace Streak
                 foreach (var g in goals)
                 {
                     //Just for test data uncheck each
-                    if (GoalDisplays(g))
+                    if (g.DisplaysOnDay(DateTime.Now))
                     {
                         Goals.Add(g);
                     }
@@ -51,40 +50,6 @@ namespace Streak
                 //This is the new goal button
                 Goals.Add(new Goal() { ID = 0, Name = "New Goal" });
             });
-        }
-
-        private bool GoalDisplays(Goal g)
-        {
-            switch ((GoalFrequency)g.SelectedFrequencyID)
-            {
-                case GoalFrequency.EveryOtherDay:
-                    //(DateTime.Now - g.CreationDate).TotalDays
-                    //This gets the age of the goal in days
-                    //does a mod to determine if its an even or of number of days
-                    //if it is even then it shows
-                    return ((DateTime.Now - g.CreationDate).Days % 2) == 0;
-                case GoalFrequency.SelectDayOfWeek:
-                    DayOfWeek dow = DateTime.Now.DayOfWeek;
-                    if (dow == DayOfWeek.Monday && g.Monday)
-                        return true;
-                    if(dow == DayOfWeek.Tuesday && g.Tuesday)
-                        return true;
-                    if(dow == DayOfWeek.Wednesday && g.Wednesday)
-                        return true; 
-                    if (dow == DayOfWeek.Thursday && g.Thursday)
-                        return true;
-                    if(dow == DayOfWeek.Friday && g.Friday)
-                        return true;
-                    if(dow == DayOfWeek.Saturday && g.Saturday)
-                        return true; 
-                    if(dow == DayOfWeek.Sunday && g.Sunday)
-                        return true; 
-
-                    return false;
-                case GoalFrequency.EveryDay: 
-                default:
-                    return true;
-            }
         }
 
         async void OnItemAdded(object sender, EventArgs e)
@@ -104,8 +69,6 @@ namespace Streak
                 await database.SaveGoalAsync(Goals[i]);
             }
         }
-
-
         async void OnItemPressed(object sender, EventArgs e)
         {
             // Get the goal

@@ -74,5 +74,39 @@ namespace Streak.Models
         {
             this.CreationDate = DateTime.Now;
         }
+
+        public bool DisplaysOnDay(DateTime queryDate)
+        {
+            switch ((GoalFrequency)SelectedFrequencyID)
+            {
+                case GoalFrequency.EveryOtherDay:
+                    //(DateTime.Now - g.CreationDate).TotalDays
+                    //This gets the age of the goal in days
+                    //does a mod to determine if its an even or of number of days
+                    //if it is even then it shows
+                    return ((queryDate - CreationDate).Days % 2) == 0;
+                case GoalFrequency.SelectDayOfWeek:
+                    DayOfWeek dow = queryDate.DayOfWeek;
+                    if (dow == DayOfWeek.Monday && Monday)
+                        return true;
+                    if (dow == DayOfWeek.Tuesday && Tuesday)
+                        return true;
+                    if (dow == DayOfWeek.Wednesday && Wednesday)
+                        return true;
+                    if (dow == DayOfWeek.Thursday && Thursday)
+                        return true;
+                    if (dow == DayOfWeek.Friday && Friday)
+                        return true;
+                    if (dow == DayOfWeek.Saturday && Saturday)
+                        return true;
+                    if (dow == DayOfWeek.Sunday && Sunday)
+                        return true;
+
+                    return false;
+                case GoalFrequency.EveryDay:
+                default:
+                    return true;
+            }
+        }
     }
 }

@@ -141,28 +141,20 @@ namespace Streak.Data
 
             //then check the previous opportunity to check the streak
 
-            switch (goal.SelectedFrequencyID)
-            {
-                case (int)GoalFrequency.EveryDay:
-
-                    break;
-                case (int)GoalFrequency.EveryOtherDay:
-
-                    break;
-                case (int)GoalFrequency.SelectDayOfWeek:
-
-                    break;
-            }
-
-            //check the next day
+            //loop backwards through days to get the streak
             bool continueChecking = true;
             
             while (continueChecking)
             {
-                //update the current streak
-                //then check the next day
+
+                
+                //itterate the day
                 lower = lower.AddDays(-1);
                 upper = upper.AddDays(-1);
+
+                //If the Goal would not display on this day continue to look at the previous day.
+                if (!goal.DisplaysOnDay(lower))
+                    continue;
 
                 int countQualify = completions.Where(x => x.CreationDate > lower && x.CreationDate < upper).Count();
 
