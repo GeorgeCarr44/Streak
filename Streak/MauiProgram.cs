@@ -12,6 +12,11 @@ namespace Streak
             builder.UseMauiApp<App>();
             builder.ConfigureFonts(fonts =>
             {
+                fonts.AddFont("Roboto-Medium", "Roboto");
+                fonts.AddFont("Roboto-Bold", "RobotoBold");
+                fonts.AddFont("Roboto-BoldItalic", "RobotoBoldItalic");
+                fonts.AddFont("Roboto-BlackItalic", "RobotoBlackItalic");
+                fonts.AddFont("Roboto-BlackItalic", "RobotoBlackItalic");
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 fonts.AddFont("Vegapunk.ttf", "Vegapunk");

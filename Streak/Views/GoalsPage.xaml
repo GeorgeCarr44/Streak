@@ -3,7 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Streak"
              xmlns:models="clr-namespace:Streak.Models"
-             x:Class="Streak.GoalsPage">
+             x:Class="Streak.GoalsPage"
+             Title="Streak"
+             >
+    <Shell.TitleView>
+        <Grid>
+            <!--Had to add two spaces to center it-->
+            <Label Style="{StaticResource Title}" Text="Streak  " HorizontalOptions="Center" VerticalOptions="Center" />
+        </Grid>
+    </Shell.TitleView>
+    
 
     <ContentPage.Resources>
         <DataTemplate x:Key="checkedDataTemplate">
@@ -18,11 +27,11 @@
         </DataTemplate>
         <DataTemplate x:Key="uncheckedDataTemplate">
             <StackLayout  FlexLayout.Basis="33%" Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
-                <Button BorderColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" 
+                <Button BorderColor="{StaticResource Primary}" 
                         BorderWidth="3" 
                         Background="Transparent" 
                         Text="{Binding CurrentStreak}" 
-                        TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource PrimaryDarkText}}" 
+                        TextColor="{StaticResource PrimaryText}" 
                         Pressed="OnItemPressed" 
                         Released="OnItemReleased" />
                 <Label Text="{Binding Name}" 
@@ -45,13 +54,11 @@
     </ContentPage.Resources>
     <ScrollView>
     <StackLayout Padding="10, 0">
-        <Label Text="Streak"/>
-            <FlexLayout BindableLayout.ItemsSource="{Binding Goals}" 
-                        BindableLayout.ItemTemplateSelector="{StaticResource goalTemplateSelector}"
-                        Direction="Row" 
-                        Wrap="Wrap" 
-                        AlignContent="Start"/>
-        <Button Background="Red" WidthRequest="160" HeightRequest="60" CornerRadius="30" Text="Check All Goals" Pressed="CheckAllGoals"></Button>
+        <FlexLayout BindableLayout.ItemsSource="{Binding Goals}" 
+            BindableLayout.ItemTemplateSelector="{StaticResource goalTemplateSelector}"
+            Direction="Row" 
+            Wrap="Wrap" 
+            AlignContent="Start"/>
     </StackLayout>
     </ScrollView>
 </ContentPage>
