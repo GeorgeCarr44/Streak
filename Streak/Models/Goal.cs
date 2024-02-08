@@ -84,7 +84,7 @@ namespace Streak.Models
                     //This gets the age of the goal in days
                     //does a mod to determine if its an even or of number of days
                     //if it is even then it shows
-                    return ((queryDate - CreationDate).Days % 2) == 0;
+                    return ((queryDate.Date - CreationDate.Date).Days % 2) == 0;
                 case GoalFrequency.SelectDayOfWeek:
                     DayOfWeek dow = queryDate.DayOfWeek;
                     if (dow == DayOfWeek.Monday && Monday)
