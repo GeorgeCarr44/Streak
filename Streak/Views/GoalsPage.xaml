@@ -8,7 +8,15 @@
              >
     <Shell.TitleView>
         <Grid>
-            <!--Had to add two spaces to center it-->
+            <!--
+            Had to add two spaces to center it
+            https://github.com/dotnet/maui/issues/3559
+            This is an issue which is caused by the frame work
+            doesnt look like this is going to be fixed
+            for now keepingt he double space as a tempory solution before a better work around is found
+            
+            -->
+            
             <Label Style="{StaticResource Title}" Text="Streak  " HorizontalOptions="Center" VerticalOptions="Center" />
         </Grid>
     </Shell.TitleView>
