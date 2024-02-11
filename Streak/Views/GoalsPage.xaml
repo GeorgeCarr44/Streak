@@ -24,18 +24,32 @@
 
     <ContentPage.Resources>
         <DataTemplate x:Key="checkedDataTemplate">
-            <StackLayout FlexLayout.Basis="33%" Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
-                <Button BorderWidth="0" Text="{Binding CurrentStreak}" Pressed="OnItemPressed" Released="OnItemReleased" />
-                <Label Text="{Binding Name}" 
-                    HeightRequest="30" 
-                    FontSize="18"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Center"/>
+            <StackLayout FlexLayout.Basis="33%" Padding="10" Spacing="10" HeightRequest="140">
+                <Button HeightRequest="100"  WidthRequest="100"  BorderWidth="0" Text="{Binding CurrentStreak}" Pressed="OnItemPressed" Released="OnItemReleased" />
+                <Border 
+                    Margin="0,-30,0,0"
+                    Stroke="{AppThemeBinding Light={StaticResource Secondary}, Dark= {StaticResource BackgroundDark}}"
+                    StrokeThickness="2"
+                    StrokeShape="RoundRectangle 30"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Background}, Dark={StaticResource SecondaryDark}}">
+                    <Border.Shadow>
+                        <Shadow Brush="{AppThemeBinding Light={StaticResource Black}, Dark= {StaticResource }}"/>
+                    </Border.Shadow>
+                
+                    <Label Text="{Binding Name}" 
+                        HeightRequest="30" 
+                        FontSize="18"
+                        HorizontalOptions="Center"
+                        VerticalTextAlignment="Center"/>
+                </Border>
             </StackLayout>
         </DataTemplate>
         <DataTemplate x:Key="uncheckedDataTemplate">
-            <StackLayout  FlexLayout.Basis="33%" Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
-                <Button BorderColor="{StaticResource Primary}" 
+            <StackLayout  FlexLayout.Basis="33%" Padding="10" Spacing="10" HeightRequest="140" WidthRequest="140">
+                <Button
+                        HeightRequest="100"  
+                        WidthRequest="100"
+                        BorderColor="{StaticResource Primary}" 
                         BorderWidth="3" 
                         Background="Transparent" 
                         Text="{Binding CurrentStreak}" 
@@ -50,8 +64,13 @@
             </StackLayout>
         </DataTemplate>
         <DataTemplate x:Key="createButtonDataTemplate">
-            <StackLayout FlexLayout.Basis="33%" Padding="10" Spacing="10" HeightRequest="180" WidthRequest="140">
-                <Button Text="+" FontSize="Large" Clicked="OnItemAdded"/>
+            <StackLayout FlexLayout.Basis="33%" Padding="10" Spacing="10" HeightRequest="140" WidthRequest="140">
+                <Button 
+                    HeightRequest="100"  
+                    WidthRequest="100"
+                    Text="+" 
+                    FontSize="Large" 
+                    Clicked="OnItemAdded"/>
             </StackLayout>
         </DataTemplate>
         <local:GoalTemplateSelector x:Key="goalTemplateSelector"
@@ -61,12 +80,13 @@
 
     </ContentPage.Resources>
     <ScrollView>
-    <StackLayout Padding="10, 0">
+    <StackLayout Padding="10,0">
         <FlexLayout BindableLayout.ItemsSource="{Binding Goals}" 
             BindableLayout.ItemTemplateSelector="{StaticResource goalTemplateSelector}"
             Direction="Row" 
             Wrap="Wrap" 
-            AlignContent="Start"/>
+            AlignContent="Start"
+            />
     </StackLayout>
     </ScrollView>
 </ContentPage>
