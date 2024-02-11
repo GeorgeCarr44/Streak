@@ -24,7 +24,7 @@
 
     <ContentPage.Resources>
         <DataTemplate x:Key="checkedDataTemplate">
-            <StackLayout FlexLayout.Basis="33%" Padding="10" Spacing="10" HeightRequest="140">
+            <StackLayout FlexLayout.Basis="50%" Padding="10" Spacing="10" HeightRequest="140" WidthRequest="200">
                 <Button 
                     HeightRequest="100"
                     WidthRequest="100"
@@ -52,7 +52,7 @@
             </StackLayout>
         </DataTemplate>
         <DataTemplate x:Key="uncheckedDataTemplate">
-            <StackLayout  FlexLayout.Basis="33%" Padding="10" Spacing="10" HeightRequest="140" WidthRequest="130">
+            <StackLayout  FlexLayout.Basis="50%" Padding="10" Spacing="10" HeightRequest="140" WidthRequest="200">
                 <Button
                     HeightRequest="100"  
                     WidthRequest="100"
@@ -83,7 +83,7 @@
             </StackLayout>
         </DataTemplate>
         <DataTemplate x:Key="createButtonDataTemplate">
-            <StackLayout FlexLayout.Basis="33%" Padding="10" Spacing="10" HeightRequest="140" WidthRequest="140">
+            <StackLayout FlexLayout.Basis="50%" Padding="10" Spacing="10" HeightRequest="140" WidthRequest="180">
                 <Button 
                     HeightRequest="100"  
                     WidthRequest="100"
