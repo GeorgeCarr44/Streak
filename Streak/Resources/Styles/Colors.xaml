@@ -16,9 +16,6 @@
     <Color x:Key="SecondarytText">#302848</Color>
     <Color x:Key="SecondaryDarkText">#EDEEEE</Color>
 
-
-
-
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
     <Color x:Key="Magenta">#D600AA</Color>

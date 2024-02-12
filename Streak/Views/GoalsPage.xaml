@@ -53,18 +53,25 @@
         </DataTemplate>
         <DataTemplate x:Key="uncheckedDataTemplate">
             <StackLayout  FlexLayout.Basis="33%" Padding="10" Spacing="10" HeightRequest="140" WidthRequest="130">
-                <Button
+                <Border
                     HeightRequest="100"  
                     WidthRequest="100"
-                    BorderColor="{StaticResource Primary}" 
-                    BorderWidth="3" 
-                    Background="Transparent" 
-                    Text="{Binding CurrentStreak}" 
-                    TextColor="{AppThemeBinding Light={StaticResource PrimaryText}, Dark={StaticResource Primary}}" 
-                    FontFamily="RobotoBlackItalic"
-                    FontSize="30"
-                    Pressed="OnItemPressed" 
-                    Released="OnItemReleased" />
+                    StrokeShape="RoundRectangle 50"
+                    StrokeThickness="3"
+                    StrokeDashArray="3,2.95"
+                    StrokeLineCap="Round"
+                    Stroke="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource SecondaryDark}}">
+                    <Button
+                        BorderColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource SecondaryDark}}"
+                        BorderWidth="3" 
+                        Background="Transparent" 
+                        Text="{Binding CurrentStreak}" 
+                        TextColor="{AppThemeBinding Light={StaticResource PrimaryText}, Dark={StaticResource Primary}}" 
+                        FontFamily="RobotoBlackItalic"
+                        FontSize="30"
+                        Pressed="OnItemPressed" 
+                        Released="OnItemReleased" />
+                </Border>
 
                 <Border 
                     Margin="0,-22,0,0"
