@@ -18,6 +18,8 @@ namespace Streak
         private System.Timers.Timer _timer;
         private Stopwatch stopWatch;
         private Goal _currentSelectedGoal;
+        private bool hasScrolled;
+
         public GoalsPage(GoalsDatabase goalsDatabase)
         {
             InitializeComponent();
@@ -93,12 +95,15 @@ namespace Streak
         // Specify what you want to happen when the Elapsed event is raised.
         async void OnHeldEvent(object source, ElapsedEventArgs e)
         {
-            //Dispose of our current running timer
-            _timer.Stop();
-            //one a goal is done dont allow it to be checked again until tomorrow
-            if (!_currentSelectedGoal.Checked)
+            if (!hasScrolled)
             {
-                await CompleteGoal(_currentSelectedGoal);
+                //Dispose of our current running timer
+                _timer.Stop();
+                //one a goal is done dont allow it to be checked again until tomorrow
+                if (!_currentSelectedGoal.Checked)
+                {
+                    await CompleteGoal(_currentSelectedGoal);
+                }
             }
         }
 
@@ -129,7 +134,16 @@ namespace Streak
                     ["Goal"] = Goal
                 });
             }
+            hasScrolled = false;
+        }
 
+        private void OnScrollViewScrolled(object sender, ScrolledEventArgs e)
+        {
+            //Stop the hold event
+
+            hasScrolled = true;
+            stopWatch.Stop();
+            _timer.Stop();
         }
     }
 }

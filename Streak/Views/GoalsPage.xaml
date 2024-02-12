@@ -70,7 +70,8 @@
                         FontFamily="RobotoBlackItalic"
                         FontSize="30"
                         Pressed="OnItemPressed" 
-                        Released="OnItemReleased" />
+                        Released="OnItemReleased" 
+                        />
                 </Border>
 
                 <Border 
@@ -106,7 +107,7 @@
                                   CreateButtonTemplate="{StaticResource createButtonDataTemplate}" />
 
     </ContentPage.Resources>
-    <ScrollView>
+    <ScrollView Scrolled="OnScrollViewScrolled">
     <StackLayout Padding="10,30">
         <FlexLayout BindableLayout.ItemsSource="{Binding Goals}" 
             BindableLayout.ItemTemplateSelector="{StaticResource goalTemplateSelector}"
