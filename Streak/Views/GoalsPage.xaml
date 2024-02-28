@@ -30,8 +30,8 @@
                     WidthRequest="100"
                     BorderWidth="0"
                     Text="{Binding CurrentStreak}"
-                    Pressed="OnItemPressed"
-                    Released="OnItemReleased"
+                    Clicked="OnItemPressed"
+                    
                     TextColor="{StaticResource PrimaryText}" 
                     FontFamily="RobotoBlackItalic"
                     FontSize="30"
@@ -69,9 +69,8 @@
                         TextColor="{AppThemeBinding Light={StaticResource PrimaryText}, Dark={StaticResource Primary}}" 
                         FontFamily="RobotoBlackItalic"
                         FontSize="30"
-                        Pressed="OnItemPressed" 
-                        Released="OnItemReleased" 
-                        />
+                        Clicked="OnItemPressed" 
+                         />
                 </Border>
 
                 <Border 
@@ -107,7 +106,7 @@
                                   CreateButtonTemplate="{StaticResource createButtonDataTemplate}" />
 
     </ContentPage.Resources>
-    <ScrollView Scrolled="OnScrollViewScrolled">
+    <ScrollView>
     <StackLayout Padding="10,30">
         <FlexLayout BindableLayout.ItemsSource="{Binding Goals}" 
             BindableLayout.ItemTemplateSelector="{StaticResource goalTemplateSelector}"
