@@ -71,6 +71,11 @@
 	  <None Remove="Resources\Fonts\Roboto-Thin.ttf" />
 	  <None Remove="Resources\Fonts\Roboto-ThinItalic.ttf" />
 	  <None Remove="Resources\Fonts\Vegapunk.otf" />
+	  <None Remove="Resources\Icons\edit.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiImage Include="Resources\Icons\edit.svg" />
 	</ItemGroup>
 
 	<ItemGroup>

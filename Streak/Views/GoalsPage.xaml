@@ -18,6 +18,7 @@
             -->
             
             <Label Style="{StaticResource Title}" Text="Streak  " HorizontalOptions="Center" VerticalOptions="Center" />
+    
         </Grid>
     </Shell.TitleView>
     

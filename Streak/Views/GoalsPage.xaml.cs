@@ -19,6 +19,7 @@ namespace Streak
         private Stopwatch stopWatch;
         private Goal _currentSelectedGoal;
         private bool hasScrolled;
+        private bool editMode;
 
         public GoalsPage(GoalsDatabase goalsDatabase)
         {
@@ -29,6 +30,7 @@ namespace Streak
 
         protected override async void OnNavigatedTo(NavigatedToEventArgs args)
         {
+            editMode = false;
             base.OnNavigatedTo(args);
             await RefreshGoals();
         }
